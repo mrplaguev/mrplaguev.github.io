@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MabbsArt | Digital & Traditional Artist</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Previous CSS remains the same */
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Light Mode Colors */
+            --sky-light: linear-gradient(to bottom, #87CEEB, #E0F7FF);
+            --forest-dark: #1a3a2a;
+            --forest-medium: #2d5a3d;
+            --forest-light: #4a7c59;
+            --forest-floor: #5d4037;
+            --accent-gold: #d4af37;
+            --chrysanthemum: #e6a8d7;
+            --chrysanthemum-light: #f0d4e8;
+            --chrysanthemum-dark: #d17bb0;
+            --text-dark: #1a3a2a;
+            --text-light: #f5f5f5;
+            --nav-bg: rgba(26, 58, 42, 0.95);
+        }
+
+        .dark {
+            /* Dark Mode Colors */
+            --sky-light: linear-gradient(to bottom, #0a0f1a, #1a2332);
+            --forest-dark: #0d1f14;
+            --forest-medium: #1a3a2a;
+            --forest-light: #2d5a3d;
+            --forest-floor: #3e2723;
+            --accent-gold: #d4af37;
+            --chrysanthemum: #e6a8d7;
+            --chrysanthemum-light: #f0d4e8;
+            --chrysanthemum-dark: #d17bb0;
+            --text-dark: #f5f5f5;
+            --text-light: #f5f5f5;
+            --nav-bg: rgba(13, 31, 20, 0.95);
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: var(--sky-light);
+            color: var(--text-dark);
+            transition: all 0.5s ease;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Sky and Stars */
+        .sky {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: var(--sky-light);
+            transition: background 0.5s ease;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .dark .stars {
+            opacity: 1;
+        }
+
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Forest Elements */
+        .forest-container {
+            position: fixed;
+            bottom: 100px; /* Stop before forest floor */
+            left: 0;
+            width: 100%;
+            height: calc(100% - 100px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .tree {
+            position: absolute;
+            bottom: 0;
+        }
+
+        .pine-tree {
+            position: absolute;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-left: 40px solid transparent;
+            border-right: 40px solid transparent;
+            border-bottom: 120px solid var(--forest-dark);
+            z-index: 10;
+        }
+
+        .pine-tree-medium {
+            position: absolute;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 90px solid var(--forest-medium);
+            z-index: 10;
+        }
+
+        .pine-tree-small {
+            position: absolute;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 60px solid var(--forest-light);
+            z-index: 10;
+        }
+
+        .tree-trunk {
+            position: absolute;
+            bottom: 0;
+            background-color: #5d4037;
+            z-index: 9;
+        }
+
+        .forest-floor {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--forest-floor), #3e2723);
+            z-index: 2; /* Lower than main content */
+        }
+
+        /* Enhanced Animated Gallery Border - FIXED POSITIONING */
+        .gallery-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin-bottom: 40px;
+            z-index: 7;
+        }
+
+        .gallery-container {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            z-index: 8;
+            border: 2px solid rgba(90, 60, 40, 0.3);
+        }
+
+        .branch-border {
+            position: absolute;
+            top: -20px; /* Reduced from -40px */
+            left: -20px; /* Reduced from -40px */
+            right: -20px; /* Reduced from -40px */
+            bottom: -20px; /* Reduced from -40px */
+            pointer-events: none;
+            z-index: 7;
+        }
+
+        .branch {
+            position: absolute;
+            background: linear-gradient(to bottom, #5D4037, #3E2723);
+            border-radius: 10px;
+            z-index: 7;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        }
+
+        /* Main branches - adjusted positioning */
+        .branch-top {
+            top: 0;
+            left: 40px; /* Reduced from 80px */
+            right: 40px; /* Reduced from 80px */
+            height: 15px;
+            transform: translateY(-15px); /* Reduced from -25px */
+        }
+
+        .branch-bottom {
+            bottom: 0;
+            left: 40px; /* Reduced from 80px */
+            right: 40px; /* Reduced from 80px */
+            height: 15px;
+            transform: translateY(15px); /* Reduced from 25px */
+        }
+
+        .branch-left {
+            left: 0;
+            top: 40px; /* Reduced from 80px */
+            bottom: 40px; /* Reduced from 80px */
+            width: 15px;
+            transform: translateX(-15px); /* Reduced from -25px */
+        }
+
+        .branch-right {
+            right: 0;
+            top: 40px; /* Reduced from 80px */
+            bottom: 40px; /* Reduced from 80px */
+            width: 15px;
+            transform: translateX(15px); /* Reduced from 25px */
+        }
+
+        /* Decorative branch extensions - adjusted positioning */
+        .branch-extension {
+            position: absolute;
+            background: linear-gradient(to bottom, #5D4037, #3E2723);
+            border-radius: 8px;
+            z-index: 7;
+        }
+
+        .ext-top-1 { top: -15px; left: 20%; width: 60px; height: 12px; transform: rotate(-15deg); }
+        .ext-top-2 { top: -15px; left: 40%; width: 80px; height: 12px; transform: rotate(5deg); }
+        .ext-top-3 { top: -15px; left: 60%; width: 70px; height: 12px; transform: rotate(-5deg); }
+        .ext-top-4 { top: -15px; left: 80%; width: 50px; height: 12px; transform: rotate(10deg); }
+
+        .ext-bottom-1 { bottom: -15px; left: 15%; width: 70px; height: 12px; transform: rotate(15deg); }
+        .ext-bottom-2 { bottom: -15px; left: 35%; width: 90px; height: 12px; transform: rotate(-5deg); }
+        .ext-bottom-3 { bottom: -15px; left: 65%; width: 60px; height: 12px; transform: rotate(8deg); }
+        .ext-bottom-4 { bottom: -15px; left: 85%; width: 80px; height: 12px; transform: rotate(-10deg); }
+
+        .ext-left-1 { left: -15px; top: 20%; width: 12px; height: 60px; transform: rotate(15deg); }
+        .ext-left-2 { left: -15px; top: 45%; width: 12px; height: 80px; transform: rotate(-5deg); }
+        .ext-left-3 { left: -15px; top: 70%; width: 12px; height: 70px; transform: rotate(10deg); }
+
+        .ext-right-1 { right: -15px; top: 15%; width: 12px; height: 70px; transform: rotate(-15deg); }
+        .ext-right-2 { right: -15px; top: 40%; width: 12px; height: 90px; transform: rotate(5deg); }
+        .ext-right-3 { right: -15px; top: 75%; width: 12px; height: 60px; transform: rotate(-8deg); }
+
+        /* Ornate corner decorations - adjusted positioning */
+        .branch-corner {
+            position: absolute;
+            width: 30px; /* Reduced from 40px */
+            height: 30px; /* Reduced from 40px */
+            background: radial-gradient(circle, #5D4037, #3E2723);
+            border-radius: 50%;
+            z-index: 8;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.4);
+        }
+
+        .corner-tl { top: -20px; left: -20px; } /* Reduced from -30px */
+        .corner-tr { top: -20px; right: -20px; } /* Reduced from -30px */
+        .corner-bl { bottom: -20px; left: -20px; } /* Reduced from -30px */
+        .corner-br { bottom: -20px; right: -20px; } /* Reduced from -30px */
+
+        /* Leaves on branches - adjusted positioning */
+        .branch-leaf {
+            position: absolute;
+            width: 20px; /* Reduced from 24px */
+            height: 20px; /* Reduced from 24px */
+            background: var(--forest-light);
+            border-radius: 50% 0 50% 50%;
+            transform: rotate(45deg);
+            z-index: 8;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+            animation: leaf-float 4s ease-in-out infinite;
+        }
+
+        @keyframes leaf-float {
+            0%, 100% { transform: rotate(45deg) translateY(0); }
+            50% { transform: rotate(45deg) translateY(-5px); }
+        }
+
+        .leaf-top-1 { top: -25px; left: 10%; animation-delay: 0s; } /* Reduced from -35px */
+        .leaf-top-2 { top: -25px; left: 25%; animation-delay: 0.5s; } /* Reduced from -35px */
+        .leaf-top-3 { top: -25px; left: 45%; animation-delay: 1s; } /* Reduced from -35px */
+        .leaf-top-4 { top: -25px; left: 65%; animation-delay: 1.5s; } /* Reduced from -35px */
+        .leaf-top-5 { top: -25px; left: 85%; animation-delay: 2s; } /* Reduced from -35px */
+
+        .leaf-bottom-1 { bottom: -25px; left: 15%; animation-delay: 0.2s; } /* Reduced from -35px */
+        .leaf-bottom-2 { bottom: -25px; left: 35%; animation-delay: 0.7s; } /* Reduced from -35px */
+        .leaf-bottom-3 { bottom: -25px; left: 55%; animation-delay: 1.2s; } /* Reduced from -35px */
+        .leaf-bottom-4 { bottom: -25px; left: 75%; animation-delay: 1.7s; } /* Reduced from -35px */
+        .leaf-bottom-5 { bottom: -25px; left: 90%; animation-delay: 2.2s; } /* Reduced from -35px */
+
+        .leaf-left-1 { left: -25px; top: 15%; animation-delay: 0.3s; } /* Reduced from -35px */
+        .leaf-left-2 { left: -25px; top: 35%; animation-delay: 0.8s; } /* Reduced from -35px */
+        .leaf-left-3 { left: -25px; top: 55%; animation-delay: 1.3s; } /* Reduced from -35px */
+        .leaf-left-4 { left: -25px; top: 75%; animation-delay: 1.8s; } /* Reduced from -35px */
+        .leaf-left-5 { left: -25px; top: 90%; animation-delay: 2.3s; } /* Reduced from -35px */
+
+        .leaf-right-1 { right: -25px; top: 10%; animation-delay: 0.4s; } /* Reduced from -35px */
+        .leaf-right-2 { right: -25px; top: 30%; animation-delay: 0.9s; } /* Reduced from -35px */
+        .leaf-right-3 { right: -25px; top: 50%; animation-delay: 1.4s; } /* Reduced from -35px */
+        .leaf-right-4 { right: -25px; top: 70%; animation-delay: 1.9s; } /* Reduced from -35px */
+        .leaf-right-5 { right: -25px; top: 85%; animation-delay: 2.4s; } /* Reduced from -35px */
+
+        /* Decorative flowers - adjusted positioning */
+        .branch-flower {
+            position: absolute;
+            width: 14px; /* Reduced from 16px */
+            height: 14px; /* Reduced from 16px */
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--chrysanthemum), var(--chrysanthemum-dark));
+            z-index: 9;
+            box-shadow: 0 0 10px rgba(230, 168, 215, 0.6);
+            animation: flower-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes flower-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+
+        .flower-1 { top: -20px; left: 30%; animation-delay: 0s; } /* Reduced from -30px */
+        .flower-2 { top: -20px; left: 70%; animation-delay: 1s; } /* Reduced from -30px */
+        .flower-3 { bottom: -20px; left: 40%; animation-delay: 0.5s; } /* Reduced from -30px */
+        .flower-4 { bottom: -20px; left: 80%; animation-delay: 1.5s; } /* Reduced from -30px */
+        .flower-5 { left: -20px; top: 40%; animation-delay: 0.7s; } /* Reduced from -30px */
+        .flower-6 { left: -20px; top: 80%; animation-delay: 1.2s; } /* Reduced from -30px */
+        .flower-7 { right: -20px; top: 20%; animation-delay: 0.3s; } /* Reduced from -30px */
+        .flower-8 { right: -20px; top: 60%; animation-delay: 1.7s; } /* Reduced from -30px */
+
+        /* Enhanced falling leaves animation */
+        .falling-leaves {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 6;
+            overflow: hidden;
+        }
+
+        .falling-leaf {
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            background: var(--forest-light);
+            border-radius: 50% 0 50% 50%;
+            transform: rotate(45deg);
+            opacity: 0;
+            animation: fall linear infinite;
+            box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.9;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(600px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Butterflies */
+        .butterflies {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 6;
+        }
+
+        .butterfly {
+            position: absolute;
+            width: 30px;
+            height: 20px;
+            opacity: 0;
+            animation: butterfly-fly linear infinite;
+        }
+
+        .butterfly::before, .butterfly::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 20px;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            border-radius: 50% 50% 0 50%;
+            animation: butterfly-flap 0.5s ease-in-out infinite alternate;
+        }
+
+        .butterfly::after {
+            right: 0;
+            border-radius: 50% 50% 50% 0;
+            background: linear-gradient(45deg, #fad0c4, #ff9a9e);
+        }
+
+        @keyframes butterfly-fly {
+            0% {
+                transform: translateX(-100px) translateY(100px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateX(calc(100vw + 100px)) translateY(-100px) rotate(180deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes butterfly-flap {
+            0% { transform: scaleY(0.8); }
+            100% { transform: scaleY(1.2); }
+        }
+
+        .gallery-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .gallery-slide.active {
+            opacity: 1;
+        }
+
+        /* Gallery Controls */
+        .gallery-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            z-index: 10;
+        }
+
+        .gallery-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .gallery-nav:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .gallery-prev {
+            left: 20px;
+        }
+
+        .gallery-next {
+            right: 20px;
+        }
+
+        /* Navigation - Chrysanthemum Button */
+        .chrysanthemum-nav {
+            position: fixed;
+            top: 25px;
+            left: 25px;
+            z-index: 100;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chrysanthemum-nav.hidden {
+            transform: translateX(-100px);
+            opacity: 0;
+        }
+
+        .chrysanthemum-flower {
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle at 30% 30%, var(--chrysanthemum-light), var(--chrysanthemum), var(--chrysanthemum-dark));
+            border-radius: 50%;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(230, 168, 215, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chrysanthemum-nav:hover .chrysanthemum-flower {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 0 20px rgba(230, 168, 215, 0.9);
+        }
+
+        .chrysanthemum-center {
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, var(--accent-gold), #b8941f);
+            border-radius: 50%;
+            position: absolute;
+            z-index: 2;
+        }
+
+        .chrysanthemum-petal {
+            position: absolute;
+            width: 20px;
+            height: 30px;
+            background: var(--chrysanthemum-light);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        /* Fixed petal positions */
+        .petal-1 { transform: rotate(0deg) translateY(-18px); }
+        .petal-2 { transform: rotate(45deg) translateY(-18px); }
+        .petal-3 { transform: rotate(90deg) translateY(-18px); }
+        .petal-4 { transform: rotate(135deg) translateY(-18px); }
+        .petal-5 { transform: rotate(180deg) translateY(-18px); }
+        .petal-6 { transform: rotate(225deg) translateY(-18px); }
+        .petal-7 { transform: rotate(270deg) translateY(-18px); }
+        .petal-8 { transform: rotate(315deg) translateY(-18px); }
+
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 98;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .nav-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .hidden-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 100%;
+            background: var(--nav-bg);
+            z-index: 99;
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(10px);
+        }
+
+        .hidden-nav.visible {
+            transform: translateX(0);
+        }
+
+        .nav-header {
+            margin-bottom: 40px;
+        }
+
+        .nav-header h2 {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .nav-header p {
+            color: var(--chrysanthemum);
+            font-style: italic;
+        }
+
+        .nav-links {
+            flex-grow: 1;
+        }
+
+        .nav-links a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--chrysanthemum);
+            padding-left: 10px;
+        }
+
+        .nav-social {
+            margin-top: 30px;
+        }
+
+        .nav-social p {
+            color: white;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .social-icons a:hover {
+            color: var(--chrysanthemum);
+            transform: scale(1.2);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Close button for nav */
+        .nav-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-close:hover {
+            color: var(--chrysanthemum);
+            transform: scale(1.2);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            z-index: 100;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .theme-toggle i {
+            color: var(--text-dark);
+            font-size: 1.2rem;
+        }
+
+        .dark .theme-toggle i {
+            color: var(--text-light);
+        }
+
+        /* Main Content */
+        .main-content {
+            position: relative;
+            z-index: 10; /* Higher than forest floor */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .artist-name {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: var(--forest-dark);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 11; /* Higher than gallery border */
+            position: relative;
+        }
+
+        .dark .artist-name {
+            color: var(--text-light);
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            color: var(--forest-medium);
+            max-width: 600px;
+            line-height: 1.6;
+            z-index: 11; /* Higher than gallery border */
+            position: relative;
+        }
+
+        .dark .tagline {
+            color: var(--text-light);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            justify-content: center;
+            z-index: 11; /* Higher than gallery border */
+            position: relative;
+        }
+
+        .cta-button {
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-button.primary {
+            background: var(--forest-light);
+            color: white;
+        }
+
+        .cta-button.primary:hover {
+            background: var(--forest-medium);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button.secondary {
+            background: var(--chrysanthemum);
+            color: white;
+        }
+
+        .cta-button.secondary:hover {
+            background: var(--chrysanthemum-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button.outline {
+            border: 2px solid var(--forest-light);
+            color: var(--forest-dark);
+            background: transparent;
+        }
+
+        .dark .cta-button.outline {
+            color: var(--text-light);
+            border-color: var(--forest-light);
+        }
+
+        .cta-button.outline:hover {
+            background: var(--forest-light);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 25px;
+            margin-top: 20px;
+            z-index: 11; /* Higher than gallery border */
+            position: relative;
+        }
+
+        .social-links a {
+            color: var(--forest-dark);
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .dark .social-links a {
+            color: var(--text-light);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .social-links a:hover {
+            color: var(--chrysanthemum);
+            transform: scale(1.2);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* NEW: Character Peeking Elements */
+        .character-peek {
+            position: fixed;
+            width: 80px;
+            height: 80px;
+            z-index: 5;
+            pointer-events: none;
+            transition: all 0.5s ease;
+            animation: peek-in-out 8s infinite;
+        }
+
+        .character-peek img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        /* Top characters - upside down to face center */
+        .character-top-left {
+            top: -20px;
+            left: 5%;
+            transform: rotate(180deg);
+        }
+
+        .character-top-right {
+            top: -20px;
+            right: 5%;
+            transform: rotate(180deg);
+        }
+
+        /* Bottom characters - right-side up to face center */
+        .character-bottom-left {
+            bottom: -20px;
+            left: 10%;
+            transform: rotate(0deg);
+        }
+
+        .character-bottom-right {
+            bottom: -20px;
+            right: 10%;
+            transform: rotate(0deg);
+        }
+
+        /* Left side characters - rotated 90° clockwise to face center */
+        .character-left-top {
+            top: 15%;
+            left: -20px;
+            transform: rotate(90deg);
+        }
+
+        .character-left-middle {
+            top: 50%;
+            left: -20px;
+            transform: rotate(90deg);
+        }
+
+        .character-left-bottom {
+            bottom: 20%;
+            left: -20px;
+            transform: rotate(90deg);
+        }
+
+        /* Right side characters - rotated 90° counter-clockwise to face center */
+        .character-right-top {
+            top: 15%;
+            right: -20px;
+            transform: rotate(-90deg);
+        }
+
+        .character-right-middle {
+            top: 50%;
+            right: -20px;
+            transform: rotate(-90deg);
+        }
+
+        .character-right-bottom {
+            bottom: 20%;
+            right: -20px;
+            transform: rotate(-90deg);
+        }
+
+        @keyframes peek-in-out {
+            0%, 100% { transform: translateY(0) rotate(var(--rotation)); }
+            50% { transform: translateY(10px) rotate(var(--rotation)); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .artist-name {
+                font-size: 3rem;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-button {
+                width: 200px;
+            }
+
+            .hidden-nav {
+                width: 250px;
+            }
+
+            .gallery-wrapper {
+                max-width: 95%;
+            }
+
+            .gallery-container {
+                height: 350px;
+            }
+
+            .gallery-nav {
+                width: 35px;
+                height: 35px;
+            }
+
+            .gallery-prev {
+                left: 10px;
+            }
+
+            .gallery-next {
+                right: 10px;
+            }
+
+            /* Adjust character sizes on mobile */
+            .character-peek {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .artist-name {
+                font-size: 2.5rem;
+            }
+
+            .gallery-container {
+                height: 280px;
+            }
+
+            .gallery-slide {
+                font-size: 1.2rem;
+            }
+
+            /* Hide some characters on very small screens */
+            .character-left-middle,
+            .character-right-middle {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Sky and Stars -->
+<div class="sky"></div>
+<div class="stars" id="stars"></div>
+
+<!-- Forest Elements -->
+<div class="forest-container" id="forestContainer"></div>
+<div class="forest-floor"></div>
+
+<!-- NEW: Character Peeking Elements -->
+<div class="character-peek character-top-left">
+    <img src="scylla/scylla1.png" alt="Character peeking from top left">
+</div>
+<div class="character-peek character-top-right">
+    <img src="scylla/scylla2.png" alt="Character peeking from top right">
+</div>
+<div class="character-peek character-bottom-left">
+    <img src="scylla/scylla3.png" alt="Character peeking from bottom left">
+</div>
+<div class="character-peek character-bottom-right">
+    <img src="scylla/scylla4.png" alt="Character peeking from bottom right">
+</div>
+<div class="character-peek character-left-top">
+    <img src="scylla/scylla5.png" alt="Character peeking from left top">
+</div>
+<div class="character-peek character-left-middle">
+    <img src="scylla/scylla6.png" alt="Character peeking from left middle">
+</div>
+<div class="character-peek character-left-bottom">
+    <img src="scylla/scylla7.png" alt="Character peeking from left bottom">
+</div>
+<div class="character-peek character-right-top">
+    <img src="scylla/scylla2.png" alt="Character peeking from right top">
+</div>
+<div class="character-peek character-right-middle">
+    <img src="scylla/scylla5.png" alt="Character peeking from right middle">
+</div>
+<div class="character-peek character-right-bottom">
+    <img src="scylla/scylla2.png" alt="Character peeking from right bottom">
+</div>
+
+<!-- Navigation - Chrysanthemum Button -->
+<div class="chrysanthemum-nav" id="navToggle">
+    <div class="chrysanthemum-flower">
+        <div class="chrysanthemum-center"></div>
+        <div class="chrysanthemum-petal petal-1"></div>
+        <div class="chrysanthemum-petal petal-2"></div>
+        <div class="chrysanthemum-petal petal-3"></div>
+        <div class="chrysanthemum-petal petal-4"></div>
+        <div class="chrysanthemum-petal petal-5"></div>
+        <div class="chrysanthemum-petal petal-6"></div>
+        <div class="chrysanthemum-petal petal-7"></div>
+        <div class="chrysanthemum-petal petal-8"></div>
+    </div>
+</div>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav class="hidden-nav" id="hiddenNav">
+    <div class="nav-close" id="navClose">
+        <i class="fas fa-times"></i>
+    </div>
+    <div class="nav-header">
+        <h2>MabbsArt</h2>
+        <p>Explore the forest</p>
+    </div>
+
+    <div class="nav-links">
+        <a href="uc.html">Homepage</a>
+        <a href="uc.html">Digital Art</a>
+        <a href="uc.html">Traditional Art</a>
+        <a href="uc.html">About</a>
+        <a href="uc.html">Contact</a>
+        <a href="uc.html">Shop</a>
+        <a href="uc.html">Blog</a>
+    </div>
+
+    <div class="nav-social">
+        <p>Follow me on social media:</p>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/mabbsart/"><i class="fab fa-instagram"></i></a>
+            <a href="uc.html"><i class="fab fa-artstation"></i></a>
+            <a href="uc.html"><i class="fab fa-twitter"></i></a>
+            <a href="uc.html"><i class="fab fa-pinterest"></i></a>
+        </div>
+    </div>
+</nav>
+
+<!-- Theme Toggle -->
+<div class="theme-toggle" id="themeToggle">
+    <i class="fas fa-sun"></i>
+</div>
+
+<!-- Main Content -->
+<main class="main-content">
+    <div class="gallery-wrapper">
+        <!-- Enhanced animated branch border -->
+        <div class="branch-border">
+            <!-- Main branches -->
+            <div class="branch branch-top"></div>
+            <div class="branch branch-bottom"></div>
+            <div class="branch branch-left"></div>
+            <div class="branch branch-right"></div>
+
+            <!-- Branch extensions -->
+            <div class="branch-extension ext-top-1"></div>
+            <div class="branch-extension ext-top-2"></div>
+            <div class="branch-extension ext-top-3"></div>
+            <div class="branch-extension ext-top-4"></div>
+
+            <div class="branch-extension ext-bottom-1"></div>
+            <div class="branch-extension ext-bottom-2"></div>
+            <div class="branch-extension ext-bottom-3"></div>
+            <div class="branch-extension ext-bottom-4"></div>
+
+            <div class="branch-extension ext-left-1"></div>
+            <div class="branch-extension ext-left-2"></div>
+            <div class="branch-extension ext-left-3"></div>
+
+            <div class="branch-extension ext-right-1"></div>
+            <div class="branch-extension ext-right-2"></div>
+            <div class="branch-extension ext-right-3"></div>
+
+            <!-- Corner decorations -->
+            <div class="branch-corner corner-tl"></div>
+            <div class="branch-corner corner-tr"></div>
+            <div class="branch-corner corner-bl"></div>
+            <div class="branch-corner corner-br"></div>
+
+            <!-- Animated leaves -->
+            <div class="branch-leaf leaf-top-1"></div>
+            <div class="branch-leaf leaf-top-2"></div>
+            <div class="branch-leaf leaf-top-3"></div>
+            <div class="branch-leaf leaf-top-4"></div>
+            <div class="branch-leaf leaf-top-5"></div>
+
+            <div class="branch-leaf leaf-bottom-1"></div>
+            <div class="branch-leaf leaf-bottom-2"></div>
+            <div class="branch-leaf leaf-bottom-3"></div>
+            <div class="branch-leaf leaf-bottom-4"></div>
+            <div class="branch-leaf leaf-bottom-5"></div>
+
+            <div class="branch-leaf leaf-left-1"></div>
+            <div class="branch-leaf leaf-left-2"></div>
+            <div class="branch-leaf leaf-left-3"></div>
+            <div class="branch-leaf leaf-left-4"></div>
+            <div class="branch-leaf leaf-left-5"></div>
+
+            <div class="branch-leaf leaf-right-1"></div>
+            <div class="branch-leaf leaf-right-2"></div>
+            <div class="branch-leaf leaf-right-3"></div>
+            <div class="branch-leaf leaf-right-4"></div>
+            <div class="branch-leaf leaf-right-5"></div>
+
+            <!-- Decorative flowers -->
+            <div class="branch-flower flower-1"></div>
+            <div class="branch-flower flower-2"></div>
+            <div class="branch-flower flower-3"></div>
+            <div class="branch-flower flower-4"></div>
+            <div class="branch-flower flower-5"></div>
+            <div class="branch-flower flower-6"></div>
+            <div class="branch-flower flower-7"></div>
+            <div class="branch-flower flower-8"></div>
+        </div>
+
+        <!-- Falling leaves animation -->
+        <div class="falling-leaves" id="fallingLeaves"></div>
+
+        <!-- Butterflies animation -->
+        <div class="butterflies" id="butterflies"></div>
+
+        <!-- Gallery container -->
+        <div class="gallery-container">
+            <div class="gallery-slide active" style="background-image: url(img/HERFRS.jpg);">
+                <div>
+                    <h3>The Creator</h3>
+                    <p>Digital Doodle</p>
+                </div>
+            </div>
+            <div class="gallery-slide" style="background-image: url(img/MEFRS.jpg);">
+                <div>
+                    <h3>Local Fool</h3>
+                    <p>Digital Doodle</p>
+                </div>
+            </div>
+            <div class="gallery-slide" style="background: linear-gradient(to bottom right, #d4af37, #f7e98e);">
+                <div>
+                    <h3>Coming Soon</h3>
+                    <p>Coming Soon</p>
+                </div>
+            </div>
+            <div class="gallery-slide" style="background: linear-gradient(to bottom right, #1a3a2a, #4a7c59);">
+                <div>
+                    <h3>Coming Soon</h3>
+                    <p>Coming Soon</p>
+                </div>
+            </div>
+
+            <!-- Gallery Controls -->
+            <button class="gallery-nav gallery-prev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="gallery-nav gallery-next">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+
+            <div class="gallery-controls">
+                <div class="gallery-dot active" data-index="0"></div>
+                <div class="gallery-dot" data-index="1"></div>
+                <div class="gallery-dot" data-index="2"></div>
+                <div class="gallery-dot" data-index="3"></div>
+            </div>
+        </div>
+    </div>
+
+    <h1 class="artist-name">MabbsArt</h1>
+    <p class="tagline">Creating immersive worlds through digital painting and traditional oils</p>
+
+    <div class="cta-buttons">
+        <a href="uc.html" class="cta-button primary">View Portfolio</a>
+        <a href="uc.html" class="cta-button secondary">Visit Shop</a>
+        <a href="uc.html" class="cta-button outline">About Me</a>
+    </div>
+
+    <div class="social-links">
+        <a href="https://www.instagram.com/mabbsart/"><i class="fab fa-instagram"></i></a>
+        <a href="uc.html"><i class="fab fa-artstation"></i></a>
+        <a href="uc.html"><i class="fab fa-twitter"></i></a>
+        <a href="uc.html"><i class="fab fa-pinterest"></i></a>
+    </div>
+</main>
+
+<script>
+    // Create stars for dark mode
+    function createStars() {
+        const starsContainer = document.getElementById('stars');
+        starsContainer.innerHTML = '';
+
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+
+            // Random position and size
+            const size = Math.random() * 3 + 1;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+
+            // Random animation delay
+            star.style.animationDelay = `${Math.random() * 5}s`;
+            star.style.animationDuration = `${Math.random() * 3 + 2}s`;
+
+            starsContainer.appendChild(star);
+        }
+    }
+
+    // Create falling leaves
+    function createFallingLeaves() {
+        const fallingLeaves = document.getElementById('fallingLeaves');
+        fallingLeaves.innerHTML = '';
+
+        for (let i = 0; i < 20; i++) {
+            const leaf = document.createElement('div');
+            leaf.classList.add('falling-leaf');
+
+            // Random position
+            leaf.style.left = `${Math.random() * 100}%`;
+
+            // Random animation duration and delay
+            const duration = Math.random() * 5 + 5; // 5-10 seconds
+            const delay = Math.random() * 5; // 0-5 seconds delay
+
+            leaf.style.animationDuration = `${duration}s`;
+            leaf.style.animationDelay = `${delay}s`;
+
+            fallingLeaves.appendChild(leaf);
+        }
+    }
+
+    // Create butterflies
+    function createButterflies() {
+        const butterflies = document.getElementById('butterflies');
+        butterflies.innerHTML = '';
+
+        for (let i = 0; i < 8; i++) {
+            const butterfly = document.createElement('div');
+            butterfly.classList.add('butterfly');
+
+            // Random position and animation
+            const duration = Math.random() * 10 + 15; // 15-25 seconds
+            const delay = Math.random() * 10; // 0-10 seconds delay
+            const top = Math.random() * 100; // Random vertical position
+
+            butterfly.style.top = `${top}%`;
+            butterfly.style.animationDuration = `${duration}s`;
+            butterfly.style.animationDelay = `${delay}s`;
+
+            butterflies.appendChild(butterfly);
+        }
+    }
+
+    // Create forest elements (only trees)
+    function createForest() {
+        const forestContainer = document.getElementById('forestContainer');
+        forestContainer.innerHTML = '';
+
+        // Large trees
+        createTree('pine-tree', '5%', '40px', '120px');
+        createTree('pine-tree', '8%', '40px', '120px');
+
+        // Medium trees
+        createTree('pine-tree-medium', '15%', '30px', '90px');
+        createTree('pine-tree-medium', '20%', '30px', '90px');
+        createTree('pine-tree-medium', '70%', '30px', '90px');
+
+        // Small trees
+        createTree('pine-tree-small', '25%', '20px', '60px');
+        createTree('pine-tree-small', '30%', '20px', '60px');
+        createTree('pine-tree-small', '40%', '20px', '60px');
+        createTree('pine-tree-small', '75%', '20px', '60px');
+        createTree('pine-tree-small', '85%', '20px', '60px');
+    }
+
+    function createTree(className, left, trunkWidth, trunkHeight) {
+        const tree = document.createElement('div');
+        tree.className = `tree ${className}`;
+        tree.style.left = left;
+        forestContainer.appendChild(tree);
+
+        const trunk = document.createElement('div');
+        trunk.className = 'tree-trunk';
+        trunk.style.left = `calc(${left} + ${parseInt(trunkWidth)/2}px)`;
+        trunk.style.width = `${parseInt(trunkWidth)/4}px`;
+        trunk.style.height = `${parseInt(trunkHeight)/3}px`;
+        forestContainer.appendChild(trunk);
+    }
+
+    // NEW: Set up character animations
+    function setupCharacterAnimations() {
+        const characters = document.querySelectorAll('.character-peek');
+
+        characters.forEach((character, index) => {
+            // Set different animation delays for each character
+            character.style.animationDelay = `${index * 0.5}s`;
+
+            // Get the rotation from the CSS class
+            const computedStyle = window.getComputedStyle(character);
+            const transform = computedStyle.getPropertyValue('transform');
+
+            // Extract rotation value from transform matrix
+            let rotation = 0;
+            if (transform !== 'none') {
+                const values = transform.split('(')[1].split(')')[0].split(',');
+                const a = values[0];
+                const b = values[1];
+                rotation = Math.round(Math.atan2(b, a) * (180/Math.PI));
+            }
+
+            // Set custom rotation property for animation
+            character.style.setProperty('--rotation', `${rotation}deg`);
+        });
+    }
+
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    if (savedTheme === 'dark') {
+        body.classList.add('dark');
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        createStars();
+    }
+
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark');
+
+        // Update icon
+        if (body.classList.contains('dark')) {
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            createStars();
+        } else {
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+
+        // Save preference
+        localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
+    });
+
+    // Navigation functionality
+    const navToggle = document.getElementById('navToggle');
+    const hiddenNav = document.getElementById('hiddenNav');
+    const navOverlay = document.getElementById('navOverlay');
+    const navClose = document.getElementById('navClose');
+
+    function openNav() {
+        hiddenNav.classList.add('visible');
+        navOverlay.classList.add('visible');
+        navToggle.classList.add('hidden');
+    }
+
+    function closeNav() {
+        hiddenNav.classList.remove('visible');
+        navOverlay.classList.remove('visible');
+        navToggle.classList.remove('hidden');
+    }
+
+    navToggle.addEventListener('click', openNav);
+    navOverlay.addEventListener('click', closeNav);
+    navClose.addEventListener('click', closeNav);
+
+    // Gallery slideshow
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.gallery-slide');
+    const dots = document.querySelectorAll('.gallery-dot');
+    const prevButton = document.querySelector('.gallery-prev');
+    const nextButton = document.querySelector('.gallery-next');
+
+    function showSlide(index) {
+        // Update slides
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[index].classList.add('active');
+
+        // Update dots
+        dots.forEach(dot => dot.classList.remove('active'));
+        dots[index].classList.add('active');
+
+        currentSlide = index;
+    }
+
+    function nextSlide() {
+        const nextIndex = (currentSlide + 1) % slides.length;
+        showSlide(nextIndex);
+    }
+
+    function prevSlide() {
+        const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(prevIndex);
+    }
+
+    // Event listeners for gallery controls
+    prevButton.addEventListener('click', prevSlide);
+    nextButton.addEventListener('click', nextSlide);
+
+    // Add click events to dots
+    dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            const index = parseInt(dot.getAttribute('data-index'));
+            showSlide(index);
+        });
+    });
+
+    // Initialize
+    createForest();
+    createStars();
+    createFallingLeaves();
+    createButterflies();
+    setupCharacterAnimations();
+
+    // Start slideshow
+    let slideshowInterval = setInterval(nextSlide, 5000);
+
+    // Pause slideshow on interaction
+    const galleryContainer = document.querySelector('.gallery-container');
+    galleryContainer.addEventListener('mouseenter', () => {
+        clearInterval(slideshowInterval);
+    });
+
+    galleryContainer.addEventListener('mouseleave', () => {
+        slideshowInterval = setInterval(nextSlide, 5000);
+    });
+</script>
+</body>
+</html>
