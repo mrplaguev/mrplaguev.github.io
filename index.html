@@ -1249,6 +1249,283 @@
                 transform: scale(0.95);
             }
         }
+
+        /* Tooltip Styles */
+        .tooltip-container {
+            position: fixed;
+            top: 80px; /* Position below the flower button */
+            left: 20px;
+            z-index: 101;
+            max-width: 250px;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .tooltip-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .tooltip {
+            background: rgba(13, 31, 20, 0.95);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            position: relative;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tooltip::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 20px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 8px solid rgba(13, 31, 20, 0.95);
+        }
+
+        .tooltip-close {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            font-size: 0.8rem;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .tooltip-close:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Hide tooltip on mobile after first interaction */
+        @media (max-width: 768px) {
+            .tooltip-container.hide-on-mobile {
+                display: none;
+            }
+        }
+
+
+        /* Language Selection Popup Styles */
+        .language-popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .language-popup-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .language-popup {
+            background: var(--nav-bg);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            position: relative;
+            border: 2px solid rgba(90, 60, 40, 0.3);
+            transform: translateY(20px);
+            transition: transform 0.5s ease;
+        }
+
+        .language-popup-overlay.visible .language-popup {
+            transform: translateY(0);
+        }
+
+        .language-popup::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--forest-medium), var(--forest-dark));
+            z-index: -1;
+            opacity: 0.7;
+        }
+
+        .language-popup h2 {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-family: 'Georgia', serif;
+        }
+
+        .language-popup p {
+            color: var(--text-light);
+            margin-bottom: 25px;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .language-options {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .language-option {
+            flex: 1;
+            max-width: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .language-option:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .language-option.selected {
+            border-color: var(--chrysanthemum);
+            background: rgba(255, 123, 37, 0.1);
+        }
+
+        .language-flag {
+            width: 60px;
+            height: 40px;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .language-flag img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .language-name {
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .language-confirm {
+            background: var(--chrysanthemum);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .language-confirm:hover {
+            background: var(--chrysanthemum-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 123, 37, 0.4);
+        }
+
+        .language-remember {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .language-remember input {
+            accent-color: var(--chrysanthemum);
+        }
+
+        /* Decorative elements for the popup */
+        .popup-leaf {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--chrysanthemum-light);
+            border-radius: 50% 0 50% 50%;
+            transform: rotate(45deg);
+            z-index: 1;
+            animation: leaf-float 4s ease-in-out infinite;
+        }
+
+        .popup-leaf-1 { top: 15px; left: 15px; animation-delay: 0s; }
+        .popup-leaf-2 { top: 15px; right: 15px; animation-delay: 1s; }
+        .popup-leaf-3 { bottom: 15px; left: 15px; animation-delay: 2s; }
+        .popup-leaf-4 { bottom: 15px; right: 15px; animation-delay: 1.5s; }
+
+        .popup-flower {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--chrysanthemum), var(--chrysanthemum-dark));
+            z-index: 1;
+            box-shadow: 0 0 6px rgba(255, 123, 37, 0.6);
+            animation: flower-pulse 3s ease-in-out infinite;
+        }
+
+        .popup-flower-1 { top: 25px; right: 25px; animation-delay: 0.5s; }
+        .popup-flower-2 { bottom: 25px; left: 25px; animation-delay: 1.2s; }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .language-popup {
+                padding: 20px;
+            }
+
+            .language-options {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .language-option {
+                max-width: 200px;
+                width: 100%;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -1292,6 +1569,46 @@
     <img src="scylla/scylla2.png" alt="Character peeking from right bottom">
 </div>
 
+<!-- Language Selection Popup -->
+<div class="language-popup-overlay" id="languagePopup">
+    <div class="language-popup">
+        <div class="popup-leaf popup-leaf-1"></div>
+        <div class="popup-leaf popup-leaf-2"></div>
+        <div class="popup-leaf popup-leaf-3"></div>
+        <div class="popup-leaf popup-leaf-4"></div>
+
+        <div class="popup-flower popup-flower-1"></div>
+        <div class="popup-flower popup-flower-2"></div>
+
+        <h2>Welcome to MabbsArt</h2>
+        <p>Please select your preferred language / Por favor selecciona tu idioma preferido</p>
+
+        <div class="language-options">
+            <div class="language-option" data-lang="en">
+                <div class="language-flag">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MCA0MCI+PHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjMDEyMTY5Ii8+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjE2IiBmaWxsPSIjYzYwMDI2Ii8+PHJlY3QgeD0iMCIgeT0iMjQiIHdpZHRoPSI2MCIgaGVpZ2h0PSIxNiIgZmlsbD0iI2M2MDAyNiIvPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIyNCIgaGVpZ2h0PSI0MCIgZmlsbD0iI2M2MDAyNiIvPjxwb2x5Z29uIHBvaW50cz0iMCwwIDI0LDAgMCwyNCIgZmlsbD0iI2ZmZmZmZiIvPjxwb2x5Z29uIHBvaW50cz0iMCw0MCAyNCw0MCAwLDE2IiBmaWxsPSIjZmZmZmZmIi8+PHBvbHlnb24gcG9pbnRzPSI2MCwwIDM2LDAgNjAsMjQiIGZpbGw9IiNmZmZmZmYiLz48cG9seWdvbiBwb2ludHM9IjYwLDQwIDM2LDQwIDYwLDE2IiBmaWxsPSIjZmZmZmZmIi8+PC9zdmc+" alt="English Flag">
+                </div>
+                <div class="language-name">English</div>
+            </div>
+
+            <div class="language-option" data-lang="es">
+                <div class="language-flag">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MCA0MCI+PHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjYzYwMDI2Ii8+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjZmZjZTBiIi8+PHJlY3QgeD0iNDAiIHk9IjAiIHdpZHRoPSIyMCIgaGVpZ2h0PSI0MCIgZmlsbD0iI2ZmY2UwYiIvPjwvc3ZnPg==" alt="Spanish Flag">
+                </div>
+                <div class="language-name">Español</div>
+            </div>
+        </div>
+
+        <button class="language-confirm" id="languageConfirm">Continue / Continuar</button>
+
+        <div class="language-remember">
+            <input type="checkbox" id="rememberLanguage">
+            <label for="rememberLanguage">Remember my choice / Recordar mi elección</label>
+        </div>
+    </div>
+</div>
+
+
 <!-- Navigation - Chrysanthemum Button -->
 <div class="chrysanthemum-nav" id="navToggle">
     <div class="chrysanthemum-flower">
@@ -1304,6 +1621,16 @@
         <div class="chrysanthemum-petal petal-6"></div>
         <div class="chrysanthemum-petal petal-7"></div>
         <div class="chrysanthemum-petal petal-8"></div>
+    </div>
+</div>
+
+<!-- Tooltip -->
+<div class="tooltip-container" id="navTooltip">
+    <div class="tooltip">
+        <button class="tooltip-close" id="tooltipClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <p>Tap/click the flower to open the navigation menu</p>
     </div>
 </div>
 
@@ -1749,6 +2076,236 @@
             createButterflies();
         }, 250);
     });
+
+
+    // Tooltip functionality
+    const navTooltip = document.getElementById('navTooltip');
+    const tooltipClose = document.getElementById('tooltipClose');
+
+    // Show tooltip after page loads
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            navTooltip.classList.add('visible');
+        }, 1000); // Show after 1 second
+    });
+
+    // Close tooltip when close button is clicked
+    tooltipClose.addEventListener('click', () => {
+        navTooltip.classList.remove('visible');
+
+        // On mobile, hide permanently after closing
+        if (window.innerWidth <= 768) {
+            navTooltip.classList.add('hide-on-mobile');
+        }
+    });
+
+    // Close tooltip when nav is opened
+    function openNav() {
+        hiddenNav.classList.add('visible');
+        navOverlay.classList.add('visible');
+        navToggle.classList.add('hidden');
+        // Prevent body scrolling when nav is open
+        document.body.style.overflow = 'hidden';
+
+        // Hide tooltip when nav is opened
+        navTooltip.classList.remove('visible');
+
+        // On mobile, hide permanently after using nav
+        if (window.innerWidth <= 768) {
+            navTooltip.classList.add('hide-on-mobile');
+        }
+    }
+
+    // Language selection functionality
+    const languagePopup = document.getElementById('languagePopup');
+    const languageOptions = document.querySelectorAll('.language-option');
+    const languageConfirm = document.getElementById('languageConfirm');
+    const rememberLanguage = document.getElementById('rememberLanguage');
+
+    let selectedLanguage = 'en'; // Default language
+
+    // Check if language preference is stored
+    function checkStoredLanguage() {
+        const storedLanguage = localStorage.getItem('mabbsart-language');
+        if (storedLanguage) {
+            // Language preference exists, apply it and don't show popup
+            applyLanguage(storedLanguage);
+            return true;
+        }
+        return false;
+    }
+
+    // Show language popup if no preference is stored
+    function showLanguagePopup() {
+        // Small delay to let page load first
+        setTimeout(() => {
+            languagePopup.classList.add('visible');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }, 500);
+    }
+
+    // Handle language selection
+    languageOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            // Remove selected class from all options
+            languageOptions.forEach(opt => opt.classList.remove('selected'));
+            // Add selected class to clicked option
+            option.classList.add('selected');
+            // Update selected language
+            selectedLanguage = option.getAttribute('data-lang');
+        });
+    });
+
+    // Handle language confirmation
+    languageConfirm.addEventListener('click', () => {
+        // Store language preference if checkbox is checked
+        if (rememberLanguage.checked) {
+            localStorage.setItem('mabbsart-language', selectedLanguage);
+        }
+
+        // Apply selected language
+        applyLanguage(selectedLanguage);
+
+        // Hide popup
+        languagePopup.classList.remove('visible');
+        document.body.style.overflow = ''; // Restore scrolling
+    });
+
+    // Language translations
+    const translations = {
+        en: {
+            // Navigation
+            "Explore the forest": "Explore the forest",
+            "Homepage": "Homepage",
+            "Digital Art": "Digital Art",
+            "Traditional Art": "Traditional Art",
+            "About": "About",
+            "Contact": "Contact",
+            "Shop": "Shop",
+            "Blog": "Blog",
+            "Follow me on social media:": "Follow me on social media:",
+
+            // Gallery
+            "The Creator": "The Creator",
+            "Digital Doodle": "Digital Doodle",
+            "Local Fool": "Local Fool",
+            "Coming Soon": "Coming Soon",
+
+            // Main content
+            "MabbsArt": "MabbsArt",
+            "Creating immersive worlds through digital painting and traditional oils": "Creating immersive worlds through digital painting and traditional oils",
+            "View Portfolio": "View Portfolio",
+            "Visit Shop": "Visit Shop",
+            "About Me": "About Me",
+
+            // Tooltip
+            "Tap/click the flower to open the navigation menu": "Tap/click the flower to open the navigation menu"
+        },
+        es: {
+            // Navigation
+            "Explore the forest": "Explora el bosque",
+            "Homepage": "Página principal",
+            "Digital Art": "Arte digital",
+            "Traditional Art": "Arte tradicional",
+            "About": "Acerca de",
+            "Contact": "Contacto",
+            "Shop": "Tienda",
+            "Blog": "Blog",
+            "Follow me on social media:": "Sígueme en redes sociales:",
+
+            // Gallery
+            "The Creator": "El Creador",
+            "Digital Doodle": "Garabato digital",
+            "Local Fool": "Tonto local",
+            "Coming Soon": "Próximamente",
+
+            // Main content
+            "MabbsArt": "MabbsArt",
+            "Creating immersive worlds through digital painting and traditional oils": "Creando mundos inmersivos a través de la pintura digital y óleos tradicionales",
+            "View Portfolio": "Ver Portafolio",
+            "Visit Shop": "Visitar Tienda",
+            "About Me": "Sobre Mí",
+
+            // Tooltip
+            "Tap/click the flower to open the navigation menu": "Toca/haz clic en la flor para abrir el menú de navegación"
+        }
+    };
+
+    // Apply language to the page
+    function applyLanguage(lang) {
+        // Update html lang attribute
+        document.documentElement.lang = lang;
+
+        // Find and translate all translatable elements
+        const translatableElements = document.querySelectorAll('[data-translate]');
+        translatableElements.forEach(element => {
+            const key = element.getAttribute('data-translate');
+            if (translations[lang] && translations[lang][key]) {
+                element.textContent = translations[lang][key];
+            }
+        });
+
+        // Update elements without data-translate attribute
+        updateElementsByText(lang);
+    }
+
+    // Update elements by matching their text content
+    function updateElementsByText(lang) {
+        // Navigation
+        updateTextContent(".nav-header p", "Explore the forest", lang);
+        updateTextContent('.nav-links a[href="uc.html"]:nth-child(1)', "Homepage", lang);
+        updateTextContent('.nav-links a[href="uc.html"]:nth-child(2)', "Digital Art", lang);
+        updateTextContent('.nav-links a[href="uc.html"]:nth-child(3)', "Traditional Art", lang);
+        updateTextContent('.nav-links a[href="uc.html"]:nth-child(4)', "About", lang);
+        updateTextContent('.nav-links a[href="uc.html"]:nth-child(5)', "Contact", lang);
+        updateTextContent('.nav-links a[href="uc.html"]:nth-child(6)', "Shop", lang);
+        updateTextContent('.nav-links a[href="uc.html"]:nth-child(7)', "Blog", lang);
+        updateTextContent('.nav-social p', "Follow me on social media:", lang);
+
+        // Gallery
+        updateTextContent('.gallery-slide:nth-child(1) h3', "The Creator", lang);
+        updateTextContent('.gallery-slide:nth-child(1) p', "Digital Doodle", lang);
+        updateTextContent('.gallery-slide:nth-child(2) h3', "Local Fool", lang);
+        updateTextContent('.gallery-slide:nth-child(2) p', "Digital Doodle", lang);
+        updateTextContent('.gallery-slide:nth-child(3) h3', "Coming Soon", lang);
+        updateTextContent('.gallery-slide:nth-child(3) p', "Coming Soon", lang);
+        updateTextContent('.gallery-slide:nth-child(4) h3', "Coming Soon", lang);
+        updateTextContent('.gallery-slide:nth-child(4) p', "Coming Soon", lang);
+
+        // Main content
+        updateTextContent('.tagline', "Creating immersive worlds through digital painting and traditional oils", lang);
+        updateTextContent('.cta-button.primary', "View Portfolio", lang);
+        updateTextContent('.cta-button.secondary', "Visit Shop", lang);
+        updateTextContent('.cta-button.outline', "About Me", lang);
+
+        // Tooltip
+        updateTextContent('#navTooltip p', "Tap/click the flower to open the navigation menu", lang);
+    }
+
+    // Helper function to update text content
+    function updateTextContent(selector, englishText, lang) {
+        const element = document.querySelector(selector);
+        if (element && translations[lang] && translations[lang][englishText]) {
+            element.textContent = translations[lang][englishText];
+        }
+    }
+
+    // Initialize language functionality
+    function initLanguage() {
+        // Check if we have a stored language preference
+        const hasStoredLanguage = checkStoredLanguage();
+
+        // If no stored preference, show the language popup
+        if (!hasStoredLanguage) {
+            showLanguagePopup();
+        }
+
+        // Set default selection
+        document.querySelector(`.language-option[data-lang="${selectedLanguage}"]`).classList.add('selected');
+    }
+
+    // Call initLanguage when DOM is loaded
+    document.addEventListener('DOMContentLoaded', initLanguage);
 </script>
 </body>
 </html>
