@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MabbsArt | Digital & Traditional Artist</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Previous CSS remains the same */
         /* Base Styles */
         * {
             margin: 0;
@@ -15,32 +14,17 @@
         }
 
         :root {
-            /* Light Mode Colors */
-            --sky-light: linear-gradient(to bottom, #87CEEB, #E0F7FF);
-            --forest-dark: #1a3a2a;
-            --forest-medium: #2d5a3d;
-            --forest-light: #4a7c59;
-            --forest-floor: #5d4037;
-            --accent-gold: #d4af37;
-            --chrysanthemum: #e6a8d7;
-            --chrysanthemum-light: #f0d4e8;
-            --chrysanthemum-dark: #d17bb0;
-            --text-dark: #1a3a2a;
-            --text-light: #f5f5f5;
-            --nav-bg: rgba(26, 58, 42, 0.95);
-        }
-
-        .dark {
-            /* Dark Mode Colors */
+            /* Dark Mode Colors Only */
             --sky-light: linear-gradient(to bottom, #0a0f1a, #1a2332);
             --forest-dark: #0d1f14;
             --forest-medium: #1a3a2a;
             --forest-light: #2d5a3d;
             --forest-floor: #3e2723;
             --accent-gold: #d4af37;
-            --chrysanthemum: #e6a8d7;
-            --chrysanthemum-light: #f0d4e8;
-            --chrysanthemum-dark: #d17bb0;
+            /* Changed from pink to orange/blue mixture */
+            --chrysanthemum: #ff7b25; /* Orange */
+            --chrysanthemum-light: #5377a5; /* Blue */
+            --chrysanthemum-dark: #e65c00; /* Darker orange */
             --text-dark: #f5f5f5;
             --text-light: #f5f5f5;
             --nav-bg: rgba(13, 31, 20, 0.95);
@@ -53,9 +37,12 @@
             transition: all 0.5s ease;
             overflow-x: hidden;
             min-height: 100vh;
+            /* Prevent horizontal scrolling */
+            max-width: 100%;
+            overflow-x: hidden;
         }
 
-        /* Sky and Stars */
+        /* Sky and Stars - Always visible since we're only using dark mode */
         .sky {
             position: fixed;
             top: 0;
@@ -64,7 +51,6 @@
             height: 100%;
             z-index: -2;
             background: var(--sky-light);
-            transition: background 0.5s ease;
         }
 
         .stars {
@@ -74,12 +60,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .dark .stars {
-            opacity: 1;
+            opacity: 1; /* Always visible */
         }
 
         .star {
@@ -94,13 +75,13 @@
             50% { opacity: 1; }
         }
 
-        /* Forest Elements */
+        /* Forest Elements - Simplified for mobile */
         .forest-container {
             position: fixed;
-            bottom: 100px; /* Stop before forest floor */
+            bottom: 80px; /* Reduced for mobile */
             left: 0;
             width: 100%;
-            height: calc(100% - 100px);
+            height: calc(100% - 80px);
             pointer-events: none;
             z-index: 1;
         }
@@ -115,9 +96,9 @@
             bottom: 0;
             width: 0;
             height: 0;
-            border-left: 40px solid transparent;
-            border-right: 40px solid transparent;
-            border-bottom: 120px solid var(--forest-dark);
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-bottom: 80px solid var(--forest-dark);
             z-index: 10;
         }
 
@@ -126,9 +107,9 @@
             bottom: 0;
             width: 0;
             height: 0;
-            border-left: 30px solid transparent;
-            border-right: 30px solid transparent;
-            border-bottom: 90px solid var(--forest-medium);
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 60px solid var(--forest-medium);
             z-index: 10;
         }
 
@@ -137,9 +118,9 @@
             bottom: 0;
             width: 0;
             height: 0;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            border-bottom: 60px solid var(--forest-light);
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 40px solid var(--forest-light);
             z-index: 10;
         }
 
@@ -155,37 +136,40 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 100px;
+            height: 80px; /* Reduced for mobile */
             background: linear-gradient(to bottom, var(--forest-floor), #3e2723);
-            z-index: 2; /* Lower than main content */
+            z-index: 2;
         }
 
-        /* Enhanced Animated Gallery Border - FIXED POSITIONING */
+        /* Enhanced Animated Gallery Border - Optimized for Mobile */
         .gallery-wrapper {
             position: relative;
             width: 100%;
-            max-width: 900px;
-            margin-bottom: 40px;
+            max-width: 95%; /* More margin on mobile */
+            margin: 0 auto 30px;
             z-index: 7;
         }
 
+        /* FIXED: Larger gallery for desktop */
         .gallery-container {
             position: relative;
             width: 100%;
-            height: 450px;
-            border-radius: 20px;
+            max-width: 500px; /* Base size for mobile */
+            height: 300px; /* Base height for mobile */
+            border-radius: 15px; /* Slightly smaller radius */
             overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
             z-index: 8;
             border: 2px solid rgba(90, 60, 40, 0.3);
+            margin: 0 auto; /* Center the gallery */
         }
 
         .branch-border {
             position: absolute;
-            top: -20px; /* Reduced from -40px */
-            left: -20px; /* Reduced from -40px */
-            right: -20px; /* Reduced from -40px */
-            bottom: -20px; /* Reduced from -40px */
+            top: -10px; /* Reduced for mobile */
+            left: -10px; /* Reduced for mobile */
+            right: -10px; /* Reduced for mobile */
+            bottom: -10px; /* Reduced for mobile */
             pointer-events: none;
             z-index: 7;
         }
@@ -193,137 +177,137 @@
         .branch {
             position: absolute;
             background: linear-gradient(to bottom, #5D4037, #3E2723);
-            border-radius: 10px;
+            border-radius: 8px; /* Smaller radius */
             z-index: 7;
-            box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
         }
 
-        /* Main branches - adjusted positioning */
+        /* Main branches - adjusted positioning for mobile */
         .branch-top {
             top: 0;
-            left: 40px; /* Reduced from 80px */
-            right: 40px; /* Reduced from 80px */
-            height: 15px;
-            transform: translateY(-15px); /* Reduced from -25px */
+            left: 20px; /* Reduced for mobile */
+            right: 20px; /* Reduced for mobile */
+            height: 12px; /* Thinner for mobile */
+            transform: translateY(-12px); /* Reduced for mobile */
         }
 
         .branch-bottom {
             bottom: 0;
-            left: 40px; /* Reduced from 80px */
-            right: 40px; /* Reduced from 80px */
-            height: 15px;
-            transform: translateY(15px); /* Reduced from 25px */
+            left: 20px; /* Reduced for mobile */
+            right: 20px; /* Reduced for mobile */
+            height: 12px; /* Thinner for mobile */
+            transform: translateY(12px); /* Reduced for mobile */
         }
 
         .branch-left {
             left: 0;
-            top: 40px; /* Reduced from 80px */
-            bottom: 40px; /* Reduced from 80px */
-            width: 15px;
-            transform: translateX(-15px); /* Reduced from -25px */
+            top: 20px; /* Reduced for mobile */
+            bottom: 20px; /* Reduced for mobile */
+            width: 12px; /* Thinner for mobile */
+            transform: translateX(-12px); /* Reduced for mobile */
         }
 
         .branch-right {
             right: 0;
-            top: 40px; /* Reduced from 80px */
-            bottom: 40px; /* Reduced from 80px */
-            width: 15px;
-            transform: translateX(15px); /* Reduced from 25px */
+            top: 20px; /* Reduced for mobile */
+            bottom: 20px; /* Reduced for mobile */
+            width: 12px; /* Thinner for mobile */
+            transform: translateX(12px); /* Reduced for mobile */
         }
 
-        /* Decorative branch extensions - adjusted positioning */
+        /* Decorative branch extensions - simplified for mobile */
         .branch-extension {
             position: absolute;
             background: linear-gradient(to bottom, #5D4037, #3E2723);
-            border-radius: 8px;
+            border-radius: 6px;
             z-index: 7;
         }
 
-        .ext-top-1 { top: -15px; left: 20%; width: 60px; height: 12px; transform: rotate(-15deg); }
-        .ext-top-2 { top: -15px; left: 40%; width: 80px; height: 12px; transform: rotate(5deg); }
-        .ext-top-3 { top: -15px; left: 60%; width: 70px; height: 12px; transform: rotate(-5deg); }
-        .ext-top-4 { top: -15px; left: 80%; width: 50px; height: 12px; transform: rotate(10deg); }
+        .ext-top-1 { top: -12px; left: 20%; width: 40px; height: 10px; transform: rotate(-15deg); }
+        .ext-top-2 { top: -12px; left: 40%; width: 50px; height: 10px; transform: rotate(5deg); }
+        .ext-top-3 { top: -12px; left: 60%; width: 45px; height: 10px; transform: rotate(-5deg); }
+        .ext-top-4 { top: -12px; left: 80%; width: 35px; height: 10px; transform: rotate(10deg); }
 
-        .ext-bottom-1 { bottom: -15px; left: 15%; width: 70px; height: 12px; transform: rotate(15deg); }
-        .ext-bottom-2 { bottom: -15px; left: 35%; width: 90px; height: 12px; transform: rotate(-5deg); }
-        .ext-bottom-3 { bottom: -15px; left: 65%; width: 60px; height: 12px; transform: rotate(8deg); }
-        .ext-bottom-4 { bottom: -15px; left: 85%; width: 80px; height: 12px; transform: rotate(-10deg); }
+        .ext-bottom-1 { bottom: -12px; left: 15%; width: 45px; height: 10px; transform: rotate(15deg); }
+        .ext-bottom-2 { bottom: -12px; left: 35%; width: 55px; height: 10px; transform: rotate(-5deg); }
+        .ext-bottom-3 { bottom: -12px; left: 65%; width: 40px; height: 10px; transform: rotate(8deg); }
+        .ext-bottom-4 { bottom: -12px; left: 85%; width: 50px; height: 10px; transform: rotate(-10deg); }
 
-        .ext-left-1 { left: -15px; top: 20%; width: 12px; height: 60px; transform: rotate(15deg); }
-        .ext-left-2 { left: -15px; top: 45%; width: 12px; height: 80px; transform: rotate(-5deg); }
-        .ext-left-3 { left: -15px; top: 70%; width: 12px; height: 70px; transform: rotate(10deg); }
+        .ext-left-1 { left: -12px; top: 20%; width: 10px; height: 40px; transform: rotate(15deg); }
+        .ext-left-2 { left: -12px; top: 45%; width: 10px; height: 50px; transform: rotate(-5deg); }
+        .ext-left-3 { left: -12px; top: 70%; width: 10px; height: 45px; transform: rotate(10deg); }
 
-        .ext-right-1 { right: -15px; top: 15%; width: 12px; height: 70px; transform: rotate(-15deg); }
-        .ext-right-2 { right: -15px; top: 40%; width: 12px; height: 90px; transform: rotate(5deg); }
-        .ext-right-3 { right: -15px; top: 75%; width: 12px; height: 60px; transform: rotate(-8deg); }
+        .ext-right-1 { right: -12px; top: 15%; width: 10px; height: 45px; transform: rotate(-15deg); }
+        .ext-right-2 { right: -12px; top: 40%; width: 10px; height: 55px; transform: rotate(5deg); }
+        .ext-right-3 { right: -12px; top: 75%; width: 10px; height: 40px; transform: rotate(-8deg); }
 
-        /* Ornate corner decorations - adjusted positioning */
+        /* Ornate corner decorations - adjusted for mobile */
         .branch-corner {
             position: absolute;
-            width: 30px; /* Reduced from 40px */
-            height: 30px; /* Reduced from 40px */
+            width: 20px; /* Reduced for mobile */
+            height: 20px; /* Reduced for mobile */
             background: radial-gradient(circle, #5D4037, #3E2723);
             border-radius: 50%;
             z-index: 8;
-            box-shadow: 3px 3px 10px rgba(0,0,0,0.4);
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
         }
 
-        .corner-tl { top: -20px; left: -20px; } /* Reduced from -30px */
-        .corner-tr { top: -20px; right: -20px; } /* Reduced from -30px */
-        .corner-bl { bottom: -20px; left: -20px; } /* Reduced from -30px */
-        .corner-br { bottom: -20px; right: -20px; } /* Reduced from -30px */
+        .corner-tl { top: -10px; left: -10px; } /* Reduced for mobile */
+        .corner-tr { top: -10px; right: -10px; } /* Reduced for mobile */
+        .corner-bl { bottom: -10px; left: -10px; } /* Reduced for mobile */
+        .corner-br { bottom: -10px; right: -10px; } /* Reduced for mobile */
 
-        /* Leaves on branches - adjusted positioning */
+        /* Leaves on branches - adjusted for mobile */
         .branch-leaf {
             position: absolute;
-            width: 20px; /* Reduced from 24px */
-            height: 20px; /* Reduced from 24px */
-            background: var(--forest-light);
+            width: 15px; /* Reduced for mobile */
+            height: 15px; /* Reduced for mobile */
+            background: var(--chrysanthemum-light);
             border-radius: 50% 0 50% 50%;
             transform: rotate(45deg);
             z-index: 8;
-            box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+            box-shadow: 1px 1px 4px rgba(0,0,0,0.3);
             animation: leaf-float 4s ease-in-out infinite;
         }
 
         @keyframes leaf-float {
             0%, 100% { transform: rotate(45deg) translateY(0); }
-            50% { transform: rotate(45deg) translateY(-5px); }
+            50% { transform: rotate(45deg) translateY(-3px); }
         }
 
-        .leaf-top-1 { top: -25px; left: 10%; animation-delay: 0s; } /* Reduced from -35px */
-        .leaf-top-2 { top: -25px; left: 25%; animation-delay: 0.5s; } /* Reduced from -35px */
-        .leaf-top-3 { top: -25px; left: 45%; animation-delay: 1s; } /* Reduced from -35px */
-        .leaf-top-4 { top: -25px; left: 65%; animation-delay: 1.5s; } /* Reduced from -35px */
-        .leaf-top-5 { top: -25px; left: 85%; animation-delay: 2s; } /* Reduced from -35px */
+        .leaf-top-1 { top: -18px; left: 10%; animation-delay: 0s; } /* Reduced for mobile */
+        .leaf-top-2 { top: -18px; left: 25%; animation-delay: 0.5s; } /* Reduced for mobile */
+        .leaf-top-3 { top: -18px; left: 45%; animation-delay: 1s; } /* Reduced for mobile */
+        .leaf-top-4 { top: -18px; left: 65%; animation-delay: 1.5s; } /* Reduced for mobile */
+        .leaf-top-5 { top: -18px; left: 85%; animation-delay: 2s; } /* Reduced for mobile */
 
-        .leaf-bottom-1 { bottom: -25px; left: 15%; animation-delay: 0.2s; } /* Reduced from -35px */
-        .leaf-bottom-2 { bottom: -25px; left: 35%; animation-delay: 0.7s; } /* Reduced from -35px */
-        .leaf-bottom-3 { bottom: -25px; left: 55%; animation-delay: 1.2s; } /* Reduced from -35px */
-        .leaf-bottom-4 { bottom: -25px; left: 75%; animation-delay: 1.7s; } /* Reduced from -35px */
-        .leaf-bottom-5 { bottom: -25px; left: 90%; animation-delay: 2.2s; } /* Reduced from -35px */
+        .leaf-bottom-1 { bottom: -18px; left: 15%; animation-delay: 0.2s; } /* Reduced for mobile */
+        .leaf-bottom-2 { bottom: -18px; left: 35%; animation-delay: 0.7s; } /* Reduced for mobile */
+        .leaf-bottom-3 { bottom: -18px; left: 55%; animation-delay: 1.2s; } /* Reduced for mobile */
+        .leaf-bottom-4 { bottom: -18px; left: 75%; animation-delay: 1.7s; } /* Reduced for mobile */
+        .leaf-bottom-5 { bottom: -18px; left: 90%; animation-delay: 2.2s; } /* Reduced for mobile */
 
-        .leaf-left-1 { left: -25px; top: 15%; animation-delay: 0.3s; } /* Reduced from -35px */
-        .leaf-left-2 { left: -25px; top: 35%; animation-delay: 0.8s; } /* Reduced from -35px */
-        .leaf-left-3 { left: -25px; top: 55%; animation-delay: 1.3s; } /* Reduced from -35px */
-        .leaf-left-4 { left: -25px; top: 75%; animation-delay: 1.8s; } /* Reduced from -35px */
-        .leaf-left-5 { left: -25px; top: 90%; animation-delay: 2.3s; } /* Reduced from -35px */
+        .leaf-left-1 { left: -18px; top: 15%; animation-delay: 0.3s; } /* Reduced for mobile */
+        .leaf-left-2 { left: -18px; top: 35%; animation-delay: 0.8s; } /* Reduced for mobile */
+        .leaf-left-3 { left: -18px; top: 55%; animation-delay: 1.3s; } /* Reduced for mobile */
+        .leaf-left-4 { left: -18px; top: 75%; animation-delay: 1.8s; } /* Reduced for mobile */
+        .leaf-left-5 { left: -18px; top: 90%; animation-delay: 2.3s; } /* Reduced for mobile */
 
-        .leaf-right-1 { right: -25px; top: 10%; animation-delay: 0.4s; } /* Reduced from -35px */
-        .leaf-right-2 { right: -25px; top: 30%; animation-delay: 0.9s; } /* Reduced from -35px */
-        .leaf-right-3 { right: -25px; top: 50%; animation-delay: 1.4s; } /* Reduced from -35px */
-        .leaf-right-4 { right: -25px; top: 70%; animation-delay: 1.9s; } /* Reduced from -35px */
-        .leaf-right-5 { right: -25px; top: 85%; animation-delay: 2.4s; } /* Reduced from -35px */
+        .leaf-right-1 { right: -18px; top: 10%; animation-delay: 0.4s; } /* Reduced for mobile */
+        .leaf-right-2 { right: -18px; top: 30%; animation-delay: 0.9s; } /* Reduced for mobile */
+        .leaf-right-3 { right: -18px; top: 50%; animation-delay: 1.4s; } /* Reduced for mobile */
+        .leaf-right-4 { right: -18px; top: 70%; animation-delay: 1.9s; } /* Reduced for mobile */
+        .leaf-right-5 { right: -18px; top: 85%; animation-delay: 2.4s; } /* Reduced for mobile */
 
-        /* Decorative flowers - adjusted positioning */
+        /* Decorative flowers - adjusted for mobile */
         .branch-flower {
             position: absolute;
-            width: 14px; /* Reduced from 16px */
-            height: 14px; /* Reduced from 16px */
+            width: 10px; /* Reduced for mobile */
+            height: 10px; /* Reduced for mobile */
             border-radius: 50%;
             background: radial-gradient(circle, var(--chrysanthemum), var(--chrysanthemum-dark));
             z-index: 9;
-            box-shadow: 0 0 10px rgba(230, 168, 215, 0.6);
+            box-shadow: 0 0 6px rgba(255, 123, 37, 0.6); /* Orange glow */
             animation: flower-pulse 3s ease-in-out infinite;
         }
 
@@ -332,16 +316,16 @@
             50% { transform: scale(1.2); opacity: 1; }
         }
 
-        .flower-1 { top: -20px; left: 30%; animation-delay: 0s; } /* Reduced from -30px */
-        .flower-2 { top: -20px; left: 70%; animation-delay: 1s; } /* Reduced from -30px */
-        .flower-3 { bottom: -20px; left: 40%; animation-delay: 0.5s; } /* Reduced from -30px */
-        .flower-4 { bottom: -20px; left: 80%; animation-delay: 1.5s; } /* Reduced from -30px */
-        .flower-5 { left: -20px; top: 40%; animation-delay: 0.7s; } /* Reduced from -30px */
-        .flower-6 { left: -20px; top: 80%; animation-delay: 1.2s; } /* Reduced from -30px */
-        .flower-7 { right: -20px; top: 20%; animation-delay: 0.3s; } /* Reduced from -30px */
-        .flower-8 { right: -20px; top: 60%; animation-delay: 1.7s; } /* Reduced from -30px */
+        .flower-1 { top: -15px; left: 30%; animation-delay: 0s; } /* Reduced for mobile */
+        .flower-2 { top: -15px; left: 70%; animation-delay: 1s; } /* Reduced for mobile */
+        .flower-3 { bottom: -15px; left: 40%; animation-delay: 0.5s; } /* Reduced for mobile */
+        .flower-4 { bottom: -15px; left: 80%; animation-delay: 1.5s; } /* Reduced for mobile */
+        .flower-5 { left: -15px; top: 40%; animation-delay: 0.7s; } /* Reduced for mobile */
+        .flower-6 { left: -15px; top: 80%; animation-delay: 1.2s; } /* Reduced for mobile */
+        .flower-7 { right: -15px; top: 20%; animation-delay: 0.3s; } /* Reduced for mobile */
+        .flower-8 { right: -15px; top: 60%; animation-delay: 1.7s; } /* Reduced for mobile */
 
-        /* Enhanced falling leaves animation */
+        /* Enhanced falling leaves animation - optimized for mobile */
         .falling-leaves {
             position: absolute;
             top: 0;
@@ -355,19 +339,19 @@
 
         .falling-leaf {
             position: absolute;
-            width: 22px;
-            height: 22px;
-            background: var(--forest-light);
+            width: 16px; /* Smaller for mobile */
+            height: 16px; /* Smaller for mobile */
+            background: var(--chrysanthemum-light);
             border-radius: 50% 0 50% 50%;
             transform: rotate(45deg);
             opacity: 0;
             animation: fall linear infinite;
-            box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
         }
 
         @keyframes fall {
             0% {
-                transform: translateY(-100px) rotate(0deg);
+                transform: translateY(-80px) rotate(0deg);
                 opacity: 0;
             }
             10% {
@@ -377,12 +361,12 @@
                 opacity: 0.7;
             }
             100% {
-                transform: translateY(600px) rotate(360deg);
+                transform: translateY(400px) rotate(360deg);
                 opacity: 0;
             }
         }
 
-        /* Butterflies */
+        /* Butterflies - optimized for mobile */
         .butterflies {
             position: absolute;
             top: 0;
@@ -395,8 +379,8 @@
 
         .butterfly {
             position: absolute;
-            width: 30px;
-            height: 20px;
+            width: 22px; /* Smaller for mobile */
+            height: 15px; /* Smaller for mobile */
             opacity: 0;
             animation: butterfly-fly linear infinite;
         }
@@ -404,9 +388,9 @@
         .butterfly::before, .butterfly::after {
             content: '';
             position: absolute;
-            width: 15px;
-            height: 20px;
-            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            width: 11px; /* Smaller for mobile */
+            height: 15px; /* Smaller for mobile */
+            background: linear-gradient(45deg, #5377a5, #1F58A6);
             border-radius: 50% 50% 0 50%;
             animation: butterfly-flap 0.5s ease-in-out infinite alternate;
         }
@@ -414,12 +398,12 @@
         .butterfly::after {
             right: 0;
             border-radius: 50% 50% 50% 0;
-            background: linear-gradient(45deg, #fad0c4, #ff9a9e);
+            background: linear-gradient(45deg, #5377a5, #1F58A6);
         }
 
         @keyframes butterfly-fly {
             0% {
-                transform: translateX(-100px) translateY(100px) rotate(0deg);
+                transform: translateX(-80px) translateY(80px) rotate(0deg);
                 opacity: 0;
             }
             10% {
@@ -429,7 +413,7 @@
                 opacity: 0.6;
             }
             100% {
-                transform: translateX(calc(100vw + 100px)) translateY(-100px) rotate(180deg);
+                transform: translateX(calc(100vw + 80px)) translateY(-80px) rotate(180deg);
                 opacity: 0;
             }
         }
@@ -451,28 +435,32 @@
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.2rem; /* Smaller for mobile */
+            text-align: center;
+            padding: 20px;
+            background-size: cover;
+            background-position: center;
         }
 
         .gallery-slide.active {
             opacity: 1;
         }
 
-        /* Gallery Controls */
+        /* Gallery Controls - optimized for touch */
         .gallery-controls {
             position: absolute;
-            bottom: 20px;
+            bottom: 15px; /* Closer for mobile */
             left: 0;
             right: 0;
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 12px; /* Smaller gap for mobile */
             z-index: 10;
         }
 
         .gallery-dot {
-            width: 12px;
-            height: 12px;
+            width: 10px; /* Smaller for mobile */
+            height: 10px; /* Smaller for mobile */
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.5);
             cursor: pointer;
@@ -491,8 +479,8 @@
             background: rgba(255, 255, 255, 0.2);
             border: none;
             color: white;
-            width: 40px;
-            height: 40px;
+            width: 35px; /* Smaller for mobile */
+            height: 35px; /* Smaller for mobile */
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -501,6 +489,9 @@
             z-index: 10;
             transition: all 0.3s ease;
             backdrop-filter: blur(5px);
+            /* Larger touch target */
+            min-width: 44px;
+            min-height: 44px;
         }
 
         .gallery-nav:hover {
@@ -509,26 +500,29 @@
         }
 
         .gallery-prev {
-            left: 20px;
+            left: 10px; /* Closer for mobile */
         }
 
         .gallery-next {
-            right: 20px;
+            right: 10px; /* Closer for mobile */
         }
 
-        /* Navigation - Chrysanthemum Button */
+        /* Navigation - Chrysanthemum Button - optimized for mobile */
         .chrysanthemum-nav {
             position: fixed;
-            top: 25px;
-            left: 25px;
+            top: 20px; /* Closer to edge for mobile */
+            left: 20px; /* Closer to edge for mobile */
             z-index: 100;
             cursor: pointer;
             transition: all 0.5s ease;
-            width: 60px;
-            height: 60px;
+            width: 50px; /* Smaller for mobile */
+            height: 50px; /* Smaller for mobile */
             display: flex;
             align-items: center;
             justify-content: center;
+            /* Larger touch target */
+            min-width: 44px;
+            min-height: 44px;
         }
 
         .chrysanthemum-nav.hidden {
@@ -536,14 +530,15 @@
             opacity: 0;
         }
 
+        /* Changed chrysanthemum flower to orange/blue mixture */
         .chrysanthemum-flower {
-            width: 50px;
-            height: 50px;
+            width: 40px; /* Smaller for mobile */
+            height: 40px; /* Smaller for mobile */
             background: radial-gradient(circle at 30% 30%, var(--chrysanthemum-light), var(--chrysanthemum), var(--chrysanthemum-dark));
             border-radius: 50%;
             position: relative;
             transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(230, 168, 215, 0.7);
+            box-shadow: 0 0 10px rgba(255, 123, 37, 0.7); /* Orange glow */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -551,12 +546,12 @@
 
         .chrysanthemum-nav:hover .chrysanthemum-flower {
             transform: scale(1.1) rotate(10deg);
-            box-shadow: 0 0 20px rgba(230, 168, 215, 0.9);
+            box-shadow: 0 0 15px rgba(255, 123, 37, 0.9); /* Brighter orange glow */
         }
 
         .chrysanthemum-center {
-            width: 20px;
-            height: 20px;
+            width: 15px; /* Smaller for mobile */
+            height: 15px; /* Smaller for mobile */
             background: radial-gradient(circle, var(--accent-gold), #b8941f);
             border-radius: 50%;
             position: absolute;
@@ -565,22 +560,23 @@
 
         .chrysanthemum-petal {
             position: absolute;
-            width: 20px;
-            height: 30px;
-            background: var(--chrysanthemum-light);
+            width: 15px; /* Smaller for mobile */
+            height: 22px; /* Smaller for mobile */
+            /* Alternating orange and blue petals */
+            background: linear-gradient(45deg, var(--chrysanthemum), var(--chrysanthemum-light));
             border-radius: 50%;
             z-index: 1;
         }
 
-        /* Fixed petal positions */
-        .petal-1 { transform: rotate(0deg) translateY(-18px); }
-        .petal-2 { transform: rotate(45deg) translateY(-18px); }
-        .petal-3 { transform: rotate(90deg) translateY(-18px); }
-        .petal-4 { transform: rotate(135deg) translateY(-18px); }
-        .petal-5 { transform: rotate(180deg) translateY(-18px); }
-        .petal-6 { transform: rotate(225deg) translateY(-18px); }
-        .petal-7 { transform: rotate(270deg) translateY(-18px); }
-        .petal-8 { transform: rotate(315deg) translateY(-18px); }
+        /* Fixed petal positions - alternating colors */
+        .petal-1 { transform: rotate(0deg) translateY(-14px); background: linear-gradient(45deg, var(--chrysanthemum), var(--chrysanthemum-dark)); } /* Orange */
+        .petal-2 { transform: rotate(45deg) translateY(-14px); background: linear-gradient(45deg, var(--chrysanthemum-light), #2c5aa0); } /* Blue */
+        .petal-3 { transform: rotate(90deg) translateY(-14px); background: linear-gradient(45deg, var(--chrysanthemum), var(--chrysanthemum-dark)); } /* Orange */
+        .petal-4 { transform: rotate(135deg) translateY(-14px); background: linear-gradient(45deg, var(--chrysanthemum-light), #2c5aa0); } /* Blue */
+        .petal-5 { transform: rotate(180deg) translateY(-14px); background: linear-gradient(45deg, var(--chrysanthemum), var(--chrysanthemum-dark)); } /* Orange */
+        .petal-6 { transform: rotate(225deg) translateY(-14px); background: linear-gradient(45deg, var(--chrysanthemum-light), #2c5aa0); } /* Blue */
+        .petal-7 { transform: rotate(270deg) translateY(-14px); background: linear-gradient(45deg, var(--chrysanthemum), var(--chrysanthemum-dark)); } /* Orange */
+        .petal-8 { transform: rotate(315deg) translateY(-14px); background: linear-gradient(45deg, var(--chrysanthemum-light), #2c5aa0); } /* Blue */
 
         .nav-overlay {
             position: fixed;
@@ -604,16 +600,17 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 300px;
+            width: 280px; /* Slightly narrower for mobile */
             height: 100%;
             background: var(--nav-bg);
             z-index: 99;
             transform: translateX(-100%);
             transition: transform 0.5s ease;
-            padding: 30px;
+            padding: 25px; /* Reduced padding for mobile */
             display: flex;
             flex-direction: column;
             backdrop-filter: blur(10px);
+            overflow-y: auto; /* Allow scrolling if needed */
         }
 
         .hidden-nav.visible {
@@ -621,18 +618,19 @@
         }
 
         .nav-header {
-            margin-bottom: 40px;
+            margin-bottom: 30px; /* Reduced for mobile */
         }
 
         .nav-header h2 {
             color: white;
-            font-size: 1.8rem;
+            font-size: 1.6rem; /* Smaller for mobile */
             margin-bottom: 5px;
         }
 
         .nav-header p {
-            color: var(--chrysanthemum);
+            color: var(--chrysanthemum); /* Now orange */
             font-style: italic;
+            font-size: 0.9rem; /* Smaller for mobile */
         }
 
         .nav-links {
@@ -643,47 +641,54 @@
             display: block;
             color: white;
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1.1rem; /* Smaller for mobile */
             padding: 12px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
+            /* Larger touch targets */
+            min-height: 44px;
+            display: flex;
+            align-items: center;
         }
 
         .nav-links a:hover {
-            color: var(--chrysanthemum);
+            color: var(--chrysanthemum); /* Now orange */
             padding-left: 10px;
         }
 
         .nav-social {
-            margin-top: 30px;
+            margin-top: 25px; /* Reduced for mobile */
         }
 
         .nav-social p {
             color: white;
-            font-size: 0.9rem;
+            font-size: 0.85rem; /* Smaller for mobile */
             margin-bottom: 10px;
         }
 
         .social-icons {
             display: flex;
-            gap: 15px;
+            gap: 12px; /* Smaller gap for mobile */
         }
 
         .social-icons a {
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.1rem; /* Smaller for mobile */
             transition: all 0.3s ease;
-            width: 40px;
-            height: 40px;
+            width: 38px; /* Smaller for mobile */
+            height: 38px; /* Smaller for mobile */
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.1);
+            /* Larger touch targets */
+            min-width: 44px;
+            min-height: 44px;
         }
 
         .social-icons a:hover {
-            color: var(--chrysanthemum);
+            color: var(--chrysanthemum); /* Now orange */
             transform: scale(1.2);
             background: rgba(255, 255, 255, 0.2);
         }
@@ -691,117 +696,95 @@
         /* Close button for nav */
         .nav-close {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 15px; /* Closer for mobile */
+            right: 15px; /* Closer for mobile */
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.3rem; /* Smaller for mobile */
             cursor: pointer;
             transition: all 0.3s ease;
-            width: 40px;
-            height: 40px;
+            width: 38px; /* Smaller for mobile */
+            height: 38px; /* Smaller for mobile */
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.1);
+            /* Larger touch target */
+            min-width: 44px;
+            min-height: 44px;
         }
 
         .nav-close:hover {
-            color: var(--chrysanthemum);
+            color: var(--chrysanthemum); /* Now orange */
             transform: scale(1.2);
             background: rgba(255, 255, 255, 0.2);
         }
 
-        /* Theme Toggle */
-        .theme-toggle {
-            position: fixed;
-            top: 25px;
-            right: 25px;
-            z-index: 100;
-            cursor: pointer;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: transform 0.3s ease;
-        }
+        /* REMOVED: Theme Toggle - deleted the entire .theme-toggle section */
 
-        .theme-toggle:hover {
-            transform: scale(1.1);
-        }
-
-        .theme-toggle i {
-            color: var(--text-dark);
-            font-size: 1.2rem;
-        }
-
-        .dark .theme-toggle i {
-            color: var(--text-light);
-        }
-
-        /* Main Content */
+        /* Main Content - optimized for mobile */
         .main-content {
             position: relative;
-            z-index: 10; /* Higher than forest floor */
+            z-index: 10;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 20px 15px; /* More padding on mobile */
             text-align: center;
         }
 
         .artist-name {
-            font-size: 4rem;
+            font-size: 2.8rem; /* Smaller for mobile */
             font-weight: bold;
-            margin-bottom: 20px;
-            color: var(--forest-dark);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            z-index: 11; /* Higher than gallery border */
-            position: relative;
-        }
-
-        .dark .artist-name {
+            margin-bottom: 15px; /* Reduced for mobile */
             color: var(--text-light);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 11;
+            position: relative;
+            line-height: 1.2; /* Better line height for mobile */
         }
 
         .tagline {
-            font-size: 1.5rem;
-            margin-bottom: 40px;
-            color: var(--forest-medium);
-            max-width: 600px;
-            line-height: 1.6;
-            z-index: 11; /* Higher than gallery border */
-            position: relative;
-        }
-
-        .dark .tagline {
+            font-size: 1.1rem; /* Smaller for mobile */
+            margin-bottom: 30px; /* Reduced for mobile */
             color: var(--text-light);
+            max-width: 100%; /* Full width on mobile */
+            line-height: 1.5; /* Better line height for mobile */
+            z-index: 11;
+            position: relative;
+            padding: 0 10px; /* Side padding for better readability */
         }
 
         .cta-buttons {
             display: flex;
-            gap: 20px;
-            margin-bottom: 50px;
+            gap: 15px; /* Smaller gap for mobile */
+            margin-bottom: 40px; /* Reduced for mobile */
             flex-wrap: wrap;
             justify-content: center;
-            z-index: 11; /* Higher than gallery border */
+            z-index: 11;
             position: relative;
+            width: 100%; /* Full width on mobile */
+            max-width: 400px; /* Limit width on larger mobile screens */
         }
 
         .cta-button {
-            padding: 12px 30px;
+            padding: 14px 25px; /* Slightly larger for touch */
             border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            font-size: 1rem; /* Consistent font size */
+            text-align: center;
+            /* Larger touch targets */
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1; /* Allow buttons to grow */
+            min-width: 140px; /* Minimum width for buttons */
         }
 
         .cta-button.primary {
@@ -816,25 +799,20 @@
         }
 
         .cta-button.secondary {
-            background: var(--chrysanthemum);
+            background: var(--chrysanthemum); /* Now orange */
             color: white;
         }
 
         .cta-button.secondary:hover {
-            background: var(--chrysanthemum-dark);
+            background: var(--chrysanthemum-dark); /* Darker orange */
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
 
         .cta-button.outline {
             border: 2px solid var(--forest-light);
-            color: var(--forest-dark);
-            background: transparent;
-        }
-
-        .dark .cta-button.outline {
             color: var(--text-light);
-            border-color: var(--forest-light);
+            background: transparent;
         }
 
         .cta-button.outline:hover {
@@ -846,42 +824,40 @@
 
         .social-links {
             display: flex;
-            gap: 25px;
+            gap: 20px; /* Smaller gap for mobile */
             margin-top: 20px;
-            z-index: 11; /* Higher than gallery border */
+            z-index: 11;
             position: relative;
         }
 
         .social-links a {
-            color: var(--forest-dark);
-            font-size: 1.8rem;
+            color: var(--text-light);
+            font-size: 1.5rem; /* Smaller for mobile */
             transition: all 0.3s ease;
-            width: 50px;
-            height: 50px;
+            width: 45px; /* Smaller for mobile */
+            height: 45px; /* Smaller for mobile */
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
-        }
-
-        .dark .social-links a {
-            color: var(--text-light);
             background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            /* Larger touch targets */
+            min-width: 44px;
+            min-height: 44px;
         }
 
         .social-links a:hover {
-            color: var(--chrysanthemum);
+            color: var(--chrysanthemum); /* Now orange */
             transform: scale(1.2);
             background: rgba(255, 255, 255, 0.3);
         }
 
-        /* NEW: Character Peeking Elements */
+        /* Character Peeking Elements - optimized for mobile */
         .character-peek {
             position: fixed;
-            width: 80px;
-            height: 80px;
+            width: 60px; /* Smaller for mobile */
+            height: 60px; /* Smaller for mobile */
             z-index: 5;
             pointer-events: none;
             transition: all 0.5s ease;
@@ -897,90 +873,92 @@
 
         /* Top characters - upside down to face center */
         .character-top-left {
-            top: -20px;
-            left: 5%;
+            top: -15px; /* Closer for mobile */
+            left: 3%; /* Closer for mobile */
             transform: rotate(180deg);
         }
 
         .character-top-right {
-            top: -20px;
-            right: 5%;
+            top: -15px; /* Closer for mobile */
+            right: 3%; /* Closer for mobile */
             transform: rotate(180deg);
         }
 
         /* Bottom characters - right-side up to face center */
         .character-bottom-left {
-            bottom: -20px;
-            left: 10%;
+            bottom: -15px; /* Closer for mobile */
+            left: 5%; /* Closer for mobile */
             transform: rotate(0deg);
         }
 
         .character-bottom-right {
-            bottom: -20px;
-            right: 10%;
+            bottom: -15px; /* Closer for mobile */
+            right: 5%; /* Closer for mobile */
             transform: rotate(0deg);
         }
 
         /* Left side characters - rotated 90° clockwise to face center */
         .character-left-top {
-            top: 15%;
-            left: -20px;
+            top: 10%; /* Adjusted for mobile */
+            left: -15px; /* Closer for mobile */
             transform: rotate(90deg);
         }
 
         .character-left-middle {
             top: 50%;
-            left: -20px;
+            left: -15px; /* Closer for mobile */
             transform: rotate(90deg);
         }
 
         .character-left-bottom {
-            bottom: 20%;
-            left: -20px;
+            bottom: 15%; /* Adjusted for mobile */
+            left: -15px; /* Closer for mobile */
             transform: rotate(90deg);
         }
 
         /* Right side characters - rotated 90° counter-clockwise to face center */
         .character-right-top {
-            top: 15%;
-            right: -20px;
+            top: 10%; /* Adjusted for mobile */
+            right: -15px; /* Closer for mobile */
             transform: rotate(-90deg);
         }
 
         .character-right-middle {
             top: 50%;
-            right: -20px;
+            right: -15px; /* Closer for mobile */
             transform: rotate(-90deg);
         }
 
         .character-right-bottom {
-            bottom: 20%;
-            right: -20px;
+            bottom: 15%; /* Adjusted for mobile */
+            right: -15px; /* Closer for mobile */
             transform: rotate(-90deg);
         }
 
         @keyframes peek-in-out {
             0%, 100% { transform: translateY(0) rotate(var(--rotation)); }
-            50% { transform: translateY(10px) rotate(var(--rotation)); }
+            50% { transform: translateY(8px) rotate(var(--rotation)); } /* Smaller movement for mobile */
         }
 
-        /* Responsive */
+        /* Responsive Design */
         @media (max-width: 768px) {
             .artist-name {
-                font-size: 3rem;
+                font-size: 2.5rem;
             }
 
             .tagline {
-                font-size: 1.2rem;
+                font-size: 1rem;
             }
 
             .cta-buttons {
                 flex-direction: column;
                 align-items: center;
+                gap: 12px;
             }
 
             .cta-button {
-                width: 200px;
+                width: 100%;
+                max-width: 250px;
             }
 
             .hidden-nav {
@@ -992,7 +970,7 @@
             }
 
             .gallery-container {
-                height: 350px;
+                height: 280px;
             }
 
             .gallery-nav {
@@ -1001,37 +979,274 @@
             }
 
             .gallery-prev {
-                left: 10px;
+                left: 8px;
             }
 
             .gallery-next {
-                right: 10px;
+                right: 8px;
             }
 
             /* Adjust character sizes on mobile */
             .character-peek {
-                width: 60px;
-                height: 60px;
+                width: 50px;
+                height: 50px;
+            }
+
+            /* Hide some decorative elements on mobile to reduce clutter */
+            .ext-top-4,
+            .ext-bottom-4,
+            .leaf-top-5,
+            .leaf-bottom-5,
+            .leaf-left-5,
+            .leaf-right-5 {
+                display: none;
+            }
+        }
+
+        @media (min-width: 769px) {
+            /* Desktop-specific styles - larger gallery with properly scaled border */
+            .gallery-wrapper {
+                max-width: 900px; /* Increased for larger desktop gallery */
+            }
+
+            .gallery-container {
+                width: 100%;
+                max-width: 900px; /* Much larger for desktop */
+                height: 500px; /* Taller for desktop */
+            }
+
+            /* Properly scaled border for desktop */
+            .branch-border {
+                top: -15px;
+                left: -15px;
+                right: -15px;
+                bottom: -15px;
+            }
+
+            .branch-top {
+                top: 0;
+                left: 30px;
+                right: 30px;
+                height: 16px;
+                transform: translateY(-16px);
+            }
+
+            .branch-bottom {
+                bottom: 0;
+                left: 30px;
+                right: 30px;
+                height: 16px;
+                transform: translateY(16px);
+            }
+
+            .branch-left {
+                left: 0;
+                top: 30px;
+                bottom: 30px;
+                width: 16px;
+                transform: translateX(-16px);
+            }
+
+            .branch-right {
+                right: 0;
+                top: 30px;
+                bottom: 30px;
+                width: 16px;
+                transform: translateX(16px);
+            }
+
+            /* Scaled branch extensions */
+            .ext-top-1 { top: -16px; left: 20%; width: 50px; height: 12px; transform: rotate(-15deg); }
+            .ext-top-2 { top: -16px; left: 40%; width: 60px; height: 12px; transform: rotate(5deg); }
+            .ext-top-3 { top: -16px; left: 60%; width: 55px; height: 12px; transform: rotate(-5deg); }
+            .ext-top-4 { top: -16px; left: 80%; width: 45px; height: 12px; transform: rotate(10deg); }
+
+            .ext-bottom-1 { bottom: -16px; left: 15%; width: 55px; height: 12px; transform: rotate(15deg); }
+            .ext-bottom-2 { bottom: -16px; left: 35%; width: 65px; height: 12px; transform: rotate(-5deg); }
+            .ext-bottom-3 { bottom: -16px; left: 65%; width: 50px; height: 12px; transform: rotate(8deg); }
+            .ext-bottom-4 { bottom: -16px; left: 85%; width: 60px; height: 12px; transform: rotate(-10deg); }
+
+            .ext-left-1 { left: -16px; top: 20%; width: 12px; height: 50px; transform: rotate(15deg); }
+            .ext-left-2 { left: -16px; top: 45%; width: 12px; height: 60px; transform: rotate(-5deg); }
+            .ext-left-3 { left: -16px; top: 70%; width: 12px; height: 55px; transform: rotate(10deg); }
+
+            .ext-right-1 { right: -16px; top: 15%; width: 12px; height: 55px; transform: rotate(-15deg); }
+            .ext-right-2 { right: -16px; top: 40%; width: 12px; height: 65px; transform: rotate(5deg); }
+            .ext-right-3 { right: -16px; top: 75%; width: 12px; height: 50px; transform: rotate(-8deg); }
+
+            /* Scaled corners */
+            .branch-corner {
+                width: 25px;
+                height: 25px;
+            }
+
+            .corner-tl { top: -15px; left: -15px; }
+            .corner-tr { top: -15px; right: -15px; }
+            .corner-bl { bottom: -15px; left: -15px; }
+            .corner-br { bottom: -15px; right: -15px; }
+
+            /* Scaled leaves */
+            .branch-leaf {
+                width: 18px;
+                height: 18px;
+            }
+
+            .leaf-top-1 { top: -22px; left: 10%; }
+            .leaf-top-2 { top: -22px; left: 25%; }
+            .leaf-top-3 { top: -22px; left: 45%; }
+            .leaf-top-4 { top: -22px; left: 65%; }
+            .leaf-top-5 { top: -22px; left: 85%; }
+
+            .leaf-bottom-1 { bottom: -22px; left: 15%; }
+            .leaf-bottom-2 { bottom: -22px; left: 35%; }
+            .leaf-bottom-3 { bottom: -22px; left: 55%; }
+            .leaf-bottom-4 { bottom: -22px; left: 75%; }
+            .leaf-bottom-5 { bottom: -22px; left: 90%; }
+
+            .leaf-left-1 { left: -22px; top: 15%; }
+            .leaf-left-2 { left: -22px; top: 35%; }
+            .leaf-left-3 { left: -22px; top: 55%; }
+            .leaf-left-4 { left: -22px; top: 75%; }
+            .leaf-left-5 { left: -22px; top: 90%; }
+
+            .leaf-right-1 { right: -22px; top: 10%; }
+            .leaf-right-2 { right: -22px; top: 30%; }
+            .leaf-right-3 { right: -22px; top: 50%; }
+            .leaf-right-4 { right: -22px; top: 70%; }
+            .leaf-right-5 { right: -22px; top: 85%; }
+
+            /* Scaled flowers */
+            .branch-flower {
+                width: 12px;
+                height: 12px;
+            }
+
+            .flower-1 { top: -18px; left: 30%; }
+            .flower-2 { top: -18px; left: 70%; }
+            .flower-3 { bottom: -18px; left: 40%; }
+            .flower-4 { bottom: -18px; left: 80%; }
+            .flower-5 { left: -18px; top: 40%; }
+            .flower-6 { left: -18px; top: 80%; }
+            .flower-7 { right: -18px; top: 20%; }
+            .flower-8 { right: -18px; top: 60%; }
+
+            /* Larger gallery controls */
+            .gallery-nav {
+                width: 45px;
+                height: 45px;
+            }
+
+            .gallery-prev {
+                left: 15px;
+            }
+
+            .gallery-next {
+                right: 15px;
+            }
+
+            .gallery-dot {
+                width: 12px;
+                height: 12px;
+            }
+
+            .gallery-slide {
+                font-size: 1.5rem;
+            }
+
+            .artist-name {
+                font-size: 3.5rem;
+            }
+
+            .tagline {
+                font-size: 1.3rem;
+                max-width: 600px;
+            }
+
+            .cta-buttons {
+                max-width: 500px;
             }
         }
 
         @media (max-width: 480px) {
             .artist-name {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
             }
 
             .gallery-container {
-                height: 280px;
+                width: 100%;
+                height: 240px;
             }
 
             .gallery-slide {
-                font-size: 1.2rem;
+                font-size: 1rem;
             }
 
-            /* Hide some characters on very small screens */
+            /* Hide more characters on very small screens */
             .character-left-middle,
-            .character-right-middle {
+            .character-right-middle,
+            .character-left-bottom,
+            .character-right-bottom {
                 display: none;
+            }
+
+            /* Further reduce decorative elements */
+            .ext-top-3,
+            .ext-bottom-3,
+            .leaf-top-4,
+            .leaf-bottom-4 {
+                display: none;
+            }
+
+            .cta-buttons {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .artist-name {
+                font-size: 1.8rem;
+            }
+
+            .tagline {
+                font-size: 0.9rem;
+            }
+
+            .gallery-container {
+                height: 200px;
+            }
+
+            /* Hide even more decorative elements on very small screens */
+            .ext-top-2,
+            .ext-bottom-2,
+            .leaf-top-3,
+            .leaf-bottom-3 {
+                display: none;
+            }
+        }
+
+        /* Prevent horizontal scrolling on all devices */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Improve touch interactions */
+        @media (hover: none) and (pointer: coarse) {
+            .gallery-nav:hover,
+            .cta-button:hover,
+            .social-links a:hover,
+            .chrysanthemum-nav:hover,
+            .nav-close:hover,
+            .social-icons a:hover {
+                transform: none;
+            }
+
+            .cta-button:active,
+            .social-links a:active,
+            .chrysanthemum-nav:active,
+            .nav-close:active,
+            .social-icons a:active {
+                transform: scale(0.95);
             }
         }
     </style>
@@ -1045,7 +1260,7 @@
 <div class="forest-container" id="forestContainer"></div>
 <div class="forest-floor"></div>
 
-<!-- NEW: Character Peeking Elements -->
+<!-- Character Peeking Elements -->
 <div class="character-peek character-top-left">
     <img src="scylla/scylla1.png" alt="Character peeking from top left">
 </div>
@@ -1124,10 +1339,7 @@
     </div>
 </nav>
 
-<!-- Theme Toggle -->
-<div class="theme-toggle" id="themeToggle">
-    <i class="fas fa-sun"></i>
-</div>
+<!-- REMOVED: Theme Toggle Button -->
 
 <!-- Main Content -->
 <main class="main-content">
@@ -1269,17 +1481,20 @@
 </main>
 
 <script>
-    // Create stars for dark mode
+    // Create stars (always visible now)
     function createStars() {
         const starsContainer = document.getElementById('stars');
         starsContainer.innerHTML = '';
 
-        for (let i = 0; i < 200; i++) {
+        // Fewer stars on mobile for performance
+        const starCount = window.innerWidth < 768 ? 100 : 200;
+
+        for (let i = 0; i < starCount; i++) {
             const star = document.createElement('div');
             star.classList.add('star');
 
             // Random position and size
-            const size = Math.random() * 3 + 1;
+            const size = Math.random() * 2 + 1; // Smaller stars on mobile
             star.style.width = `${size}px`;
             star.style.height = `${size}px`;
             star.style.left = `${Math.random() * 100}%`;
@@ -1298,7 +1513,10 @@
         const fallingLeaves = document.getElementById('fallingLeaves');
         fallingLeaves.innerHTML = '';
 
-        for (let i = 0; i < 20; i++) {
+        // Fewer leaves on mobile for performance
+        const leafCount = window.innerWidth < 768 ? 12 : 20;
+
+        for (let i = 0; i < leafCount; i++) {
             const leaf = document.createElement('div');
             leaf.classList.add('falling-leaf');
 
@@ -1321,7 +1539,10 @@
         const butterflies = document.getElementById('butterflies');
         butterflies.innerHTML = '';
 
-        for (let i = 0; i < 8; i++) {
+        // Fewer butterflies on mobile for performance
+        const butterflyCount = window.innerWidth < 768 ? 5 : 8;
+
+        for (let i = 0; i < butterflyCount; i++) {
             const butterfly = document.createElement('div');
             butterfly.classList.add('butterfly');
 
@@ -1344,20 +1565,20 @@
         forestContainer.innerHTML = '';
 
         // Large trees
-        createTree('pine-tree', '5%', '40px', '120px');
-        createTree('pine-tree', '8%', '40px', '120px');
+        createTree('pine-tree', '5%', '25px', '80px');
+        createTree('pine-tree', '8%', '25px', '80px');
 
         // Medium trees
-        createTree('pine-tree-medium', '15%', '30px', '90px');
-        createTree('pine-tree-medium', '20%', '30px', '90px');
-        createTree('pine-tree-medium', '70%', '30px', '90px');
+        createTree('pine-tree-medium', '15%', '20px', '60px');
+        createTree('pine-tree-medium', '20%', '20px', '60px');
+        createTree('pine-tree-medium', '70%', '20px', '60px');
 
         // Small trees
-        createTree('pine-tree-small', '25%', '20px', '60px');
-        createTree('pine-tree-small', '30%', '20px', '60px');
-        createTree('pine-tree-small', '40%', '20px', '60px');
-        createTree('pine-tree-small', '75%', '20px', '60px');
-        createTree('pine-tree-small', '85%', '20px', '60px');
+        createTree('pine-tree-small', '25%', '15px', '40px');
+        createTree('pine-tree-small', '30%', '15px', '40px');
+        createTree('pine-tree-small', '40%', '15px', '40px');
+        createTree('pine-tree-small', '75%', '15px', '40px');
+        createTree('pine-tree-small', '85%', '15px', '40px');
     }
 
     function createTree(className, left, trunkWidth, trunkHeight) {
@@ -1374,7 +1595,7 @@
         forestContainer.appendChild(trunk);
     }
 
-    // NEW: Set up character animations
+    // Set up character animations
     function setupCharacterAnimations() {
         const characters = document.querySelectorAll('.character-peek');
 
@@ -1400,32 +1621,7 @@
         });
     }
 
-    // Theme toggle functionality
-    const themeToggle = document.getElementById('themeToggle');
-    const body = document.body;
-
-    // Check for saved theme preference
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    if (savedTheme === 'dark') {
-        body.classList.add('dark');
-        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-        createStars();
-    }
-
-    themeToggle.addEventListener('click', () => {
-        body.classList.toggle('dark');
-
-        // Update icon
-        if (body.classList.contains('dark')) {
-            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-            createStars();
-        } else {
-            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-        }
-
-        // Save preference
-        localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
-    });
+    // REMOVED: Theme toggle functionality
 
     // Navigation functionality
     const navToggle = document.getElementById('navToggle');
@@ -1437,12 +1633,16 @@
         hiddenNav.classList.add('visible');
         navOverlay.classList.add('visible');
         navToggle.classList.add('hidden');
+        // Prevent body scrolling when nav is open
+        document.body.style.overflow = 'hidden';
     }
 
     function closeNav() {
         hiddenNav.classList.remove('visible');
         navOverlay.classList.remove('visible');
         navToggle.classList.remove('hidden');
+        // Restore body scrolling
+        document.body.style.overflow = '';
     }
 
     navToggle.addEventListener('click', openNav);
@@ -1490,9 +1690,39 @@
         });
     });
 
+    // Swipe functionality for mobile gallery
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    const galleryContainer = document.querySelector('.gallery-container');
+
+    galleryContainer.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, {passive: true});
+
+    galleryContainer.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, {passive: true});
+
+    function handleSwipe() {
+        const swipeThreshold = 50; // Minimum swipe distance
+        const swipeDistance = touchEndX - touchStartX;
+
+        if (Math.abs(swipeDistance) > swipeThreshold) {
+            if (swipeDistance > 0) {
+                // Swipe right - previous slide
+                prevSlide();
+            } else {
+                // Swipe left - next slide
+                nextSlide();
+            }
+        }
+    }
+
     // Initialize
     createForest();
-    createStars();
+    createStars(); // Stars are always created now
     createFallingLeaves();
     createButterflies();
     setupCharacterAnimations();
@@ -1501,13 +1731,23 @@
     let slideshowInterval = setInterval(nextSlide, 5000);
 
     // Pause slideshow on interaction
-    const galleryContainer = document.querySelector('.gallery-container');
     galleryContainer.addEventListener('mouseenter', () => {
         clearInterval(slideshowInterval);
     });
 
     galleryContainer.addEventListener('mouseleave', () => {
         slideshowInterval = setInterval(nextSlide, 5000);
+    });
+
+    // Recreate elements on resize for better mobile adaptation
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            createStars();
+            createFallingLeaves();
+            createButterflies();
+        }, 250);
     });
 </script>
 </body>
