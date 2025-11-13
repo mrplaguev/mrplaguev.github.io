@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MabbsArt | Digital & Traditional Artist</title>
+    <title>MabbsArt | Blog</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Reuse all the existing styles from the homepage */
         /* Base Styles */
         * {
             margin: 0;
@@ -1526,6 +1527,223 @@
             }
         }
 
+        /* Blog-specific styles */
+        .blog-container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 80px 15px 30px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .blog-header {
+            text-align: center;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+
+        .blog-title {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--text-light);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-subtitle {
+            font-size: 1rem;
+            color: var(--text-light);
+            opacity: 0.8;
+        }
+
+        .phone-mockup {
+            width: 100%;
+            max-width: 400px;
+            height: 700px;
+            background: #1a1a1a;
+            border-radius: 30px;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40%;
+            height: 20px;
+            background: #1a1a1a;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            z-index: 10;
+        }
+
+        .instagram-timeline {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            border-radius: 20px;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        /* Instagram-like post styles */
+        .instagram-post {
+            background: #000;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #262626;
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+        }
+
+        .post-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: 10px;
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .post-username {
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .post-more {
+            margin-left: auto;
+            color: white;
+            font-size: 18px;
+        }
+
+        .post-image {
+            width: 100%;
+            height: auto;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            min-height: 400px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .post-actions {
+            display: flex;
+            padding: 10px 15px;
+            font-size: 24px;
+            color: white;
+        }
+
+        .post-action {
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        .post-action.save {
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        .post-likes {
+            padding: 0 15px;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .post-caption {
+            padding: 0 15px 10px;
+            color: white;
+            font-size: 14px;
+        }
+
+        .post-caption .username {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .post-time {
+            padding: 0 15px 15px;
+            color: #8e8e8e;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .text-only-post {
+            padding: 20px 15px;
+            color: white;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .swipe-indicator {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 14px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 8px 15px;
+            border-radius: 20px;
+            animation: pulse 2s infinite;
+            z-index: 10;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+
+        /* Responsive adjustments for blog page */
+        @media (max-width: 480px) {
+            .phone-mockup {
+                height: 600px;
+                border-radius: 20px;
+            }
+
+            .blog-title {
+                font-size: 1.8rem;
+            }
+
+            .post-image {
+                min-height: 300px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .phone-mockup {
+                height: 500px;
+            }
+
+            .post-image {
+                min-height: 250px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1607,7 +1825,6 @@
     </div>
 </div>
 
-
 <!-- Navigation - Chrysanthemum Button -->
 <div class="chrysanthemum-nav" id="navToggle">
     <div class="chrysanthemum-flower">
@@ -1645,7 +1862,7 @@
     </div>
 
     <div class="nav-links">
-        <a href="uc.html">Homepage</a>
+        <a href="index.html">Homepage</a>
         <a href="uc.html">Digital Art</a>
         <a href="uc.html">Traditional Art</a>
         <a href="uc.html">About</a>
@@ -1665,148 +1882,101 @@
     </div>
 </nav>
 
-<!-- REMOVED: Theme Toggle Button -->
-
-<!-- Main Content -->
-<main class="main-content">
-    <div class="gallery-wrapper">
-        <!-- Enhanced animated branch border -->
-        <div class="branch-border">
-            <!-- Main branches -->
-            <div class="branch branch-top"></div>
-            <div class="branch branch-bottom"></div>
-            <div class="branch branch-left"></div>
-            <div class="branch branch-right"></div>
-
-            <!-- Branch extensions -->
-            <div class="branch-extension ext-top-1"></div>
-            <div class="branch-extension ext-top-2"></div>
-            <div class="branch-extension ext-top-3"></div>
-            <div class="branch-extension ext-top-4"></div>
-
-            <div class="branch-extension ext-bottom-1"></div>
-            <div class="branch-extension ext-bottom-2"></div>
-            <div class="branch-extension ext-bottom-3"></div>
-            <div class="branch-extension ext-bottom-4"></div>
-
-            <div class="branch-extension ext-left-1"></div>
-            <div class="branch-extension ext-left-2"></div>
-            <div class="branch-extension ext-left-3"></div>
-
-            <div class="branch-extension ext-right-1"></div>
-            <div class="branch-extension ext-right-2"></div>
-            <div class="branch-extension ext-right-3"></div>
-
-            <!-- Corner decorations -->
-            <div class="branch-corner corner-tl"></div>
-            <div class="branch-corner corner-tr"></div>
-            <div class="branch-corner corner-bl"></div>
-            <div class="branch-corner corner-br"></div>
-
-            <!-- Animated leaves -->
-            <div class="branch-leaf leaf-top-1"></div>
-            <div class="branch-leaf leaf-top-2"></div>
-            <div class="branch-leaf leaf-top-3"></div>
-            <div class="branch-leaf leaf-top-4"></div>
-            <div class="branch-leaf leaf-top-5"></div>
-
-            <div class="branch-leaf leaf-bottom-1"></div>
-            <div class="branch-leaf leaf-bottom-2"></div>
-            <div class="branch-leaf leaf-bottom-3"></div>
-            <div class="branch-leaf leaf-bottom-4"></div>
-            <div class="branch-leaf leaf-bottom-5"></div>
-
-            <div class="branch-leaf leaf-left-1"></div>
-            <div class="branch-leaf leaf-left-2"></div>
-            <div class="branch-leaf leaf-left-3"></div>
-            <div class="branch-leaf leaf-left-4"></div>
-            <div class="branch-leaf leaf-left-5"></div>
-
-            <div class="branch-leaf leaf-right-1"></div>
-            <div class="branch-leaf leaf-right-2"></div>
-            <div class="branch-leaf leaf-right-3"></div>
-            <div class="branch-leaf leaf-right-4"></div>
-            <div class="branch-leaf leaf-right-5"></div>
-
-            <!-- Decorative flowers -->
-            <div class="branch-flower flower-1"></div>
-            <div class="branch-flower flower-2"></div>
-            <div class="branch-flower flower-3"></div>
-            <div class="branch-flower flower-4"></div>
-            <div class="branch-flower flower-5"></div>
-            <div class="branch-flower flower-6"></div>
-            <div class="branch-flower flower-7"></div>
-            <div class="branch-flower flower-8"></div>
-        </div>
-
-        <!-- Falling leaves animation -->
-        <div class="falling-leaves" id="fallingLeaves"></div>
-
-        <!-- Butterflies animation -->
-        <div class="butterflies" id="butterflies"></div>
-
-        <!-- Gallery container -->
-        <div class="gallery-container">
-            <div class="gallery-slide active" style="background-image: url(img/HERFRS.jpg);">
-                <div>
-                    <h3>The Creator</h3>
-                    <p>Digital Doodle</p>
-                </div>
-            </div>
-            <div class="gallery-slide" style="background-image: url(img/MEFRS.jpg);">
-                <div>
-                    <h3>Local Fool</h3>
-                    <p>Digital Doodle</p>
-                </div>
-            </div>
-            <div class="gallery-slide" style="background: linear-gradient(to bottom right, #d4af37, #f7e98e);">
-                <div>
-                    <h3>Coming Soon</h3>
-                    <p>Coming Soon</p>
-                </div>
-            </div>
-            <div class="gallery-slide" style="background: linear-gradient(to bottom right, #1a3a2a, #4a7c59);">
-                <div>
-                    <h3>Coming Soon</h3>
-                    <p>Coming Soon</p>
-                </div>
-            </div>
-
-            <!-- Gallery Controls -->
-            <button class="gallery-nav gallery-prev">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="gallery-nav gallery-next">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-
-            <div class="gallery-controls">
-                <div class="gallery-dot active" data-index="0"></div>
-                <div class="gallery-dot" data-index="1"></div>
-                <div class="gallery-dot" data-index="2"></div>
-                <div class="gallery-dot" data-index="3"></div>
-            </div>
-        </div>
+<!-- Blog Content -->
+<main class="blog-container">
+    <div class="blog-header">
+        <h1 class="blog-title">MabbsArt Blog</h1>
+        <p class="blog-subtitle">Behind the scenes & creative process</p>
     </div>
 
-    <h1 class="artist-name">MabbsArt</h1>
-    <p class="tagline">Creating immersive worlds through digital painting and traditional oils</p>
+    <div class="phone-mockup">
+        <div class="phone-notch"></div>
+        <div class="instagram-timeline" id="timeline">
+            <!-- Post 1: Image with description -->
+            <div class="instagram-post">
+                <div class="post-header">
+                    <div class="post-avatar">M</div>
+                    <div class="post-username">mabbsart</div>
+                    <div class="post-more">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>
+                </div>
+                <div class="post-image" style="background-image: url('img/HERFRS.jpg');">
+                    <!-- Image content -->
+                </div>
+                <div class="post-actions">
+                    <div class="post-action"><i class="far fa-heart"></i></div>
+                    <div class="post-action"><i class="far fa-comment"></i></div>
+                    <div class="post-action"><i class="far fa-paper-plane"></i></div>
+                    <div class="post-action save"><i class="far fa-bookmark"></i></div>
+                </div>
+                <div class="post-likes">1,247 likes</div>
+                <div class="post-caption">
+                    <span class="username">mabbsart</span> Just finished this digital piece inspired by forest spirits. The color palette was challenging but I'm happy with the final result! #digitalart #forest #spirits #mabbsart
+                </div>
+                <div class="post-time">2 days ago</div>
+            </div>
 
-    <div class="cta-buttons">
-        <a href="uc.html" class="cta-button primary">View Portfolio</a>
-        <a href="uc.html" class="cta-button secondary">Visit Shop</a>
-        <a href="uc.html" class="cta-button outline">About Me</a>
-    </div>
+            <!-- Post 2: Image only -->
+            <div class="instagram-post">
+                <div class="post-header">
+                    <div class="post-avatar">M</div>
+                    <div class="post-username">mabbsart</div>
+                    <div class="post-more">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>
+                </div>
+                <div class="post-image" style="background: linear-gradient(135deg, #5377a5, #ff7b25); display: flex; align-items: center; justify-content: center;">
+                    <div style="text-align: center; color: white; padding: 20px;">
+                        <i class="fas fa-palette" style="font-size: 48px; margin-bottom: 15px;"></i>
+                        <p>New color study - exploring orange and blue combinations</p>
+                    </div>
+                </div>
+                <div class="post-actions">
+                    <div class="post-action"><i class="far fa-heart"></i></div>
+                    <div class="post-action"><i class="far fa-comment"></i></div>
+                    <div class="post-action"><i class="far fa-paper-plane"></i></div>
+                    <div class="post-action save"><i class="far fa-bookmark"></i></div>
+                </div>
+                <div class="post-likes">892 likes</div>
+                <div class="post-time">1 week ago</div>
+            </div>
 
-    <div class="social-links">
-        <a href="https://www.instagram.com/mabbsart/"><i class="fab fa-instagram"></i></a>
-        <a href="uc.html"><i class="fab fa-artstation"></i></a>
-        <a href="uc.html"><i class="fab fa-twitter"></i></a>
-        <a href="uc.html"><i class="fab fa-pinterest"></i></a>
+            <!-- Post 3: Text only -->
+            <div class="instagram-post">
+                <div class="post-header">
+                    <div class="post-avatar">M</div>
+                    <div class="post-username">mabbsart</div>
+                    <div class="post-more">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>
+                </div>
+                <div class="text-only-post">
+                    <p>Working on a new series inspired by mythological creatures from different cultures. The research phase is always my favorite part - so many fascinating stories and visual references to explore!</p>
+                    <br>
+                    <p>Currently diving deep into Slavic folklore. The contrast between beautiful and terrifying in these tales is incredibly inspiring for visual storytelling.</p>
+                    <br>
+                    <p>#artprocess #mythology #folklore #slavic #inspiration</p>
+                </div>
+                <div class="post-actions">
+                    <div class="post-action"><i class="far fa-heart"></i></div>
+                    <div class="post-action"><i class="far fa-comment"></i></div>
+                    <div class="post-action"><i class="far fa-paper-plane"></i></div>
+                    <div class="post-action save"><i class="far fa-bookmark"></i></div>
+                </div>
+                <div class="post-likes">543 likes</div>
+                <div class="post-time">2 weeks ago</div>
+            </div>
+        </div>
+
+        <div class="swipe-indicator">
+            <i class="fas fa-arrow-up"></i> Swipe to see more posts
+        </div>
     </div>
 </main>
 
 <script>
+    // Reuse all the existing JavaScript from the homepage
     // Create stars (always visible now)
     function createStars() {
         const starsContainer = document.getElementById('stars');
@@ -1947,8 +2117,6 @@
         });
     }
 
-    // REMOVED: Theme toggle functionality
-
     // Navigation functionality
     const navToggle = document.getElementById('navToggle');
     const hiddenNav = document.getElementById('hiddenNav');
@@ -1974,108 +2142,6 @@
     navToggle.addEventListener('click', openNav);
     navOverlay.addEventListener('click', closeNav);
     navClose.addEventListener('click', closeNav);
-
-    // Gallery slideshow
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.gallery-slide');
-    const dots = document.querySelectorAll('.gallery-dot');
-    const prevButton = document.querySelector('.gallery-prev');
-    const nextButton = document.querySelector('.gallery-next');
-
-    function showSlide(index) {
-        // Update slides
-        slides.forEach(slide => slide.classList.remove('active'));
-        slides[index].classList.add('active');
-
-        // Update dots
-        dots.forEach(dot => dot.classList.remove('active'));
-        dots[index].classList.add('active');
-
-        currentSlide = index;
-    }
-
-    function nextSlide() {
-        const nextIndex = (currentSlide + 1) % slides.length;
-        showSlide(nextIndex);
-    }
-
-    function prevSlide() {
-        const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(prevIndex);
-    }
-
-    // Event listeners for gallery controls
-    prevButton.addEventListener('click', prevSlide);
-    nextButton.addEventListener('click', nextSlide);
-
-    // Add click events to dots
-    dots.forEach(dot => {
-        dot.addEventListener('click', () => {
-            const index = parseInt(dot.getAttribute('data-index'));
-            showSlide(index);
-        });
-    });
-
-    // Swipe functionality for mobile gallery
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    const galleryContainer = document.querySelector('.gallery-container');
-
-    galleryContainer.addEventListener('touchstart', e => {
-        touchStartX = e.changedTouches[0].screenX;
-    }, {passive: true});
-
-    galleryContainer.addEventListener('touchend', e => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-    }, {passive: true});
-
-    function handleSwipe() {
-        const swipeThreshold = 50; // Minimum swipe distance
-        const swipeDistance = touchEndX - touchStartX;
-
-        if (Math.abs(swipeDistance) > swipeThreshold) {
-            if (swipeDistance > 0) {
-                // Swipe right - previous slide
-                prevSlide();
-            } else {
-                // Swipe left - next slide
-                nextSlide();
-            }
-        }
-    }
-
-    // Initialize
-    createForest();
-    createStars(); // Stars are always created now
-    createFallingLeaves();
-    createButterflies();
-    setupCharacterAnimations();
-
-    // Start slideshow
-    let slideshowInterval = setInterval(nextSlide, 5000);
-
-    // Pause slideshow on interaction
-    galleryContainer.addEventListener('mouseenter', () => {
-        clearInterval(slideshowInterval);
-    });
-
-    galleryContainer.addEventListener('mouseleave', () => {
-        slideshowInterval = setInterval(nextSlide, 5000);
-    });
-
-    // Recreate elements on resize for better mobile adaptation
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            createStars();
-            createFallingLeaves();
-            createButterflies();
-        }, 250);
-    });
-
 
     // Tooltip functionality
     const navTooltip = document.getElementById('navTooltip');
@@ -2184,18 +2250,10 @@
             "Blog": "Blog",
             "Follow me on social media:": "Follow me on social media:",
 
-            // Gallery
-            "The Creator": "The Creator",
-            "Digital Doodle": "Digital Doodle",
-            "Local Fool": "Local Fool",
-            "Coming Soon": "Coming Soon",
-
-            // Main content
-            "MabbsArt": "MabbsArt",
-            "Creating immersive worlds through digital painting and traditional oils": "Creating immersive worlds through digital painting and traditional oils",
-            "View Portfolio": "View Portfolio",
-            "Visit Shop": "Visit Shop",
-            "About Me": "About Me",
+            // Blog page
+            "MabbsArt Blog": "MabbsArt Blog",
+            "Behind the scenes & creative process": "Behind the scenes & creative process",
+            "Swipe to see more posts": "Swipe to see more posts",
 
             // Tooltip
             "Tap/click the flower to open the navigation menu": "Tap/click the flower to open the navigation menu"
@@ -2212,18 +2270,10 @@
             "Blog": "Blog",
             "Follow me on social media:": "Sígueme en redes sociales:",
 
-            // Gallery
-            "The Creator": "El Creador",
-            "Digital Doodle": "Garabato digital",
-            "Local Fool": "Tonto local",
-            "Coming Soon": "Próximamente",
-
-            // Main content
-            "MabbsArt": "MabbsArt",
-            "Creating immersive worlds through digital painting and traditional oils": "Creando mundos inmersivos a través de la pintura digital y óleos tradicionales",
-            "View Portfolio": "Ver Portafolio",
-            "Visit Shop": "Visitar Tienda",
-            "About Me": "Sobre Mí",
+            // Blog page
+            "MabbsArt Blog": "Blog de MabbsArt",
+            "Behind the scenes & creative process": "Detrás de escenas y proceso creativo",
+            "Swipe to see more posts": "Desliza para ver más publicaciones",
 
             // Tooltip
             "Tap/click the flower to open the navigation menu": "Toca/haz clic en la flor para abrir el menú de navegación"
@@ -2252,30 +2302,19 @@
     function updateElementsByText(lang) {
         // Navigation
         updateTextContent(".nav-header p", "Explore the forest", lang);
-        updateTextContent('.nav-links a[href="uc.html"]:nth-child(1)', "Homepage", lang);
+        updateTextContent('.nav-links a[href="index.html"]', "Homepage", lang);
         updateTextContent('.nav-links a[href="uc.html"]:nth-child(2)', "Digital Art", lang);
         updateTextContent('.nav-links a[href="uc.html"]:nth-child(3)', "Traditional Art", lang);
         updateTextContent('.nav-links a[href="uc.html"]:nth-child(4)', "About", lang);
         updateTextContent('.nav-links a[href="uc.html"]:nth-child(5)', "Contact", lang);
         updateTextContent('.nav-links a[href="uc.html"]:nth-child(6)', "Shop", lang);
-        updateTextContent('.nav-links a[href="uc.html"]:nth-child(7)', "Blog", lang);
+        updateTextContent('.nav-links a[href="blog.html"]', "Blog", lang);
         updateTextContent('.nav-social p', "Follow me on social media:", lang);
 
-        // Gallery
-        updateTextContent('.gallery-slide:nth-child(1) h3', "The Creator", lang);
-        updateTextContent('.gallery-slide:nth-child(1) p', "Digital Doodle", lang);
-        updateTextContent('.gallery-slide:nth-child(2) h3', "Local Fool", lang);
-        updateTextContent('.gallery-slide:nth-child(2) p', "Digital Doodle", lang);
-        updateTextContent('.gallery-slide:nth-child(3) h3', "Coming Soon", lang);
-        updateTextContent('.gallery-slide:nth-child(3) p', "Coming Soon", lang);
-        updateTextContent('.gallery-slide:nth-child(4) h3', "Coming Soon", lang);
-        updateTextContent('.gallery-slide:nth-child(4) p', "Coming Soon", lang);
-
-        // Main content
-        updateTextContent('.tagline', "Creating immersive worlds through digital painting and traditional oils", lang);
-        updateTextContent('.cta-button.primary', "View Portfolio", lang);
-        updateTextContent('.cta-button.secondary', "Visit Shop", lang);
-        updateTextContent('.cta-button.outline', "About Me", lang);
+        // Blog page
+        updateTextContent('.blog-title', "MabbsArt Blog", lang);
+        updateTextContent('.blog-subtitle', "Behind the scenes & creative process", lang);
+        updateTextContent('.swipe-indicator', "Swipe to see more posts", lang);
 
         // Tooltip
         updateTextContent('#navTooltip p', "Tap/click the flower to open the navigation menu", lang);
@@ -2302,6 +2341,24 @@
         // Set default selection
         document.querySelector(`.language-option[data-lang="${selectedLanguage}"]`).classList.add('selected');
     }
+
+    // Initialize
+    createForest();
+    createStars(); // Stars are always created now
+    createFallingLeaves();
+    createButterflies();
+    setupCharacterAnimations();
+
+    // Recreate elements on resize for better mobile adaptation
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            createStars();
+            createFallingLeaves();
+            createButterflies();
+        }, 250);
+    });
 
     // Call initLanguage when DOM is loaded
     document.addEventListener('DOMContentLoaded', initLanguage);
